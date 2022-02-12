@@ -1,2 +1,2 @@
 # university-fortran
-simple student laboratory work written in Fortran!3
+simple student laboratory work written in Fortran!4
