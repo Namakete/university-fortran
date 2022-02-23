@@ -1,8 +1,9 @@
 #!/bin/bash
 
+read -p "Enter fullname: " folder # Enter the name of the folder
 
-read -p "Enter fullname: " file
-mkdir $file
-cp -rv .maket/ $file/
+mkdir $folder # Create a folder
+
+cp -rv .maket/ $folder/ # Copies and pastes configuration files from '.layout/' to 'the created folder'
 
 
