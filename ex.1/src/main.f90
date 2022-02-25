@@ -1,6 +1,6 @@
-program first
+program main
    print "('hello ilya')"
-end program first
+end program main
 
 
 
