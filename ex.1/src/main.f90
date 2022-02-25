@@ -1,5 +1,5 @@
 program main
-   print "('hello ilya')"
+   print "('Hello World!')"
 end program main
 
 
