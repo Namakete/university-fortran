@@ -1,5 +1,6 @@
 module sub
   implicit none
+  private
   public :: plus
 contains
   integer function plus(a, b) result(answer)
