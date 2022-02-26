@@ -3,7 +3,7 @@ program main
 
   implicit none
 
-  integer :: a = 5, b = 7
+  integer :: a = 7, b = 7
 
   print *, plus(a, b)
 
