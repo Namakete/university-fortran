@@ -4,25 +4,22 @@ program main
 
   implicit none
   
-character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  character(:), allocatable  :: fmt
-  integer                    :: In = 0, Out = 1, arr_size = 10, n = 0
-  real(R_), allocatable      :: Arr(:)
+  character(*), parameter       :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                       :: In = 0, Out = 1, size = 10, N = 0
+  real(R_), allocatable      :: Arr(:,:)
 
-  call number_random_generation(arr_size)
+  call number_random_generation(size)
   
   open (file=input_file, newunit=In)
-    read (In, *) n
-    allocate(Arr(n))
-    read(In, *) Arr
+    read(In, *) N
+    allocate(Arr(N,N))
   close(In)
+
+
 
   
 
-
-  open (file = output_file, encoding = E_, newunit = Out)
-    fmt = "(a, T7, '= ', f6.2)"
-    write (Out, fmt) "z="
+  open (file=output_file, encoding=E_, newunit=Out)
   close (Out)
   
 end program main

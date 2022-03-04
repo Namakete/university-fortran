@@ -3,7 +3,7 @@ module gen_array
 
     implicit none
 
-    public::number_random_generation
+    public :: number_random_generation
 
 contains
 
