@@ -16,18 +16,16 @@ program main
 
   open (file=output_file, encoding=E_, newunit=Out)
   fmt = "(a, T7, f6.2)"
-
   if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
     if((x < shorthand_multiplication(a, b)) .and. (w <= shorthand_multiplication(c, d))) then
       write (Out, fmt) "y1=", calculation(x, w, plus)
       write (Out, fmt) "y2=", calculation(x, w, minus)
-    else 
-      write (Out, fmt) "error1"
+    else
+      write (Out, fmt) "Case not provided"
     end if
   else
-    write (Out, fmt) "error2"
+    write (Out, fmt) "Case not provided"
   end if
-
   close (Out)
 
 end program main
