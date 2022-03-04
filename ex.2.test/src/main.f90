@@ -21,10 +21,8 @@ program exercise_2
       write (Out, "('f = ', f0.2)") fval
    close (Out)
 
-   !fval = FImpure(x, y, z, w)
-
 contains
-   ! Чистая функция.
+
    pure function F(x, y, z, w)
       real(R_) F, x, y, z, w
       intent(in)  x, y, z, w
@@ -36,32 +34,8 @@ contains
       else if (x<0 .and. z>5) then
          F = w + cos(y)*x
       else
-         ! Присвоение не числа -- NaN.
          F = IEEE_Value(x, IEEE_Quiet_NaN)
       end if
    end function F
-   
-   ! Нечистая функция с вычислениями и с вводом/выводом одновременно.
-   ! Так реализовывать не нужно.
-   ! Демонстирует применение блока БЕЗ использования меток.
-   function FImpure(x, y, z, w) result(F)
-      real(R_) F, x, y, z, w
-      intent(in)  x, y, z, w
- 
-      open (file=output_file, encoding=E_, newunit=Out, position='append')
-         eval: block
-            if (x>0 .and. z<5) then
-               F = x*x + w
-            else if (x>0 .and. z>=5) then
-               F = cos(z) + x*y
-            else if (x<0 .and. z>5) then
-               F = w + cos(y)*x
-            else
-               write (Out, "('f is indetermined')")
-               exit eval
-            end if
-            write (Out, "('f = ', f0.2)") F
-         end block eval
-      close (Out)
-   end function FImpure
+  
 end program exercise_2

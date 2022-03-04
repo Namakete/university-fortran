@@ -14,7 +14,7 @@ program main
     read (In, *) a, b, c, d, e, f
   close(In)
 
-  if (denominator(a, b, d, e) == 0) then
+  if (denominator(a, b, d, e) < 0) then
     print *, 'System determinant is zero'
   else
     m1 = f1(b, c, e, f) / denominator(a, b, d, e)
