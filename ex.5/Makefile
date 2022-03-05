@@ -6,7 +6,7 @@ FOPT=-O3 -ftree-vectorize -fopt-info-vec
 debug:
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
 	$(FC) $(FFLAGS) $(FOPT)  -c src/main.f90 -I obj/ -o obj/main.o
-	$(FC) $(FFLAGS) $(FOPT) -o bin/app  obj/main.o
+	$(FC) $(FFLAGS) $(FOPT) -o bin/app obj/main.o
 
 clean:
 	rm -rf obj/*
