@@ -19,17 +19,11 @@ program exercise_1_3
 
    Items(1) = x-1
 
-   print *, Items(1)
-   
    do i = 2, 4
       Items(i) = Items(i-1) * Items(1)
    end do
 
-   print *, Items
-
    Items = Items / [1, -2, 3, -4]
-
-   print *, Items
 
    ln_x = Sum(Items)
 

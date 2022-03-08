@@ -9,9 +9,8 @@ clean:
 
 debug:
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
-	$(FC) $(FFLAGS) -c src/func.f90 -J obj/ -o obj/func.o
 	$(FC) $(FFLAGS) $(FOPT)  -c src/main.f90 -I obj/ -o obj/main.o
-	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/func.o obj/main.o
+	$(FC) $(FFLAGS) $(FOPT) -o bin/app obj/main.o
 
 run:
 	cd ./bin; ./app;

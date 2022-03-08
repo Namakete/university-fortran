@@ -22,7 +22,6 @@ program main
       print '(A,4(1X,I0))', 'column:',  sum(a,dim=1)
   close (Out)
 
-
 end program main
 
 
