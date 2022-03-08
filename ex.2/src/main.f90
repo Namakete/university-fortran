@@ -14,7 +14,7 @@ program main
 
     open (file=output_file, encoding=E_, newunit=Out)
       write (Out, "(4(a, f0.2/))") "a = ", a, "b = ", b, "c = ", c, "d = ", d, "x = ", x, "w = ", w
-    close (Out)
+   close (Out)
 
     if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
         func = F(a, b, x, w)
