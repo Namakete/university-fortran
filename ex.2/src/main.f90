@@ -36,7 +36,7 @@ contains
                 end if
                 write (Out, "('y = ', f0.2)") F
             else
-                write (Out, "('f is indetermined')")
+                write (Out, "('Case not provided')")
             end if
         end block eval
         close (Out)
