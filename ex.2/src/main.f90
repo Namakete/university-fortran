@@ -7,23 +7,25 @@ program main
     character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
     integer                    :: In = 0, Out = 0
     real(R_)                   :: a = 0, b = 0, c = 0, d = 0, x = 0, w = 0, func = 0
+    Character(len = 20) :: error
 
     open (file=input_file, newunit=In)
         read (In, *) a, b, c, d, x, w
     close(In)
 
     open (file=output_file, encoding=E_, newunit=Out)
-      write (Out, "(4(a, f0.2/))") "a = ", a, "b = ", b, "c = ", c, "d = ", d, "x = ", x, "w = ", w
+      write (Out, "(6(a, f0.2/))") "a = ", a, "b = ", b, "c = ", c, "d = ", d, "x = ", x, "w = ", w
    close (Out)
 
-    if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
+   if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
         func = F(a, b, x, w)
-    else 
-        write(Out, "('f = ', f0.2)") "Error"
-    end if
+   else 
+
+   end if
+
     
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, "(1(a, f0.2/))") "f1 = ", func
+        write(Out, "(1(a, f0.2/))") "f1 = ", func, error
     close (Out)
 
 contains
