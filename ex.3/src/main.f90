@@ -9,7 +9,6 @@ program main
 
   open (file=input_file, newunit=In)
    read(In, *) rows, columns
-
    allocate(A(rows, columns))
 
    do i = 1, rows
