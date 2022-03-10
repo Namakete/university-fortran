@@ -1,1 +1,6 @@
-z=    =   6.00
+8
+ F T F T F T T T
+
+Array Size: 8
+Value negative items: 5
+
