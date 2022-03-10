@@ -3,7 +3,7 @@ program main
 
   implicit none
   
-character(*), parameter      :: input_file = "../data/input.txt", output_file = "output.txt"
+  character(*), parameter      :: input_file = "../data/input.txt", output_file = "output.txt"
   integer                    :: In = 0, Out = 0, N = 0, M = 0
   logical                    :: mask = .true.
   integer, allocatable       :: X(:), Mat(:), Slice(:)
@@ -22,8 +22,7 @@ character(*), parameter      :: input_file = "../data/input.txt", output_file = 
   call Negative(Slice, Neg, M)
 
   open (file=output_file, encoding=E_, newunit=Out)
-  write (Out, "("//N//"(i0, 1x))") X
-  write (Out, *) Neg
+  write (Out, "(/(i0, 1x))") X
   write (Out, '(/1(a, T11, ": ", i0))') 'Array Size', N
   write (Out, '(1(a, T21, ": ", i0/))') 'Value negative items', M
   close (Out)
@@ -40,7 +39,7 @@ contains
     M = Count(Neg)
 
  end subroutine Negative
- 
+
 end program main
 
 
