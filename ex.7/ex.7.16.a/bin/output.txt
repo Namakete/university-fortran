@@ -1,1 +1,5 @@
-z=    =   6.00
+ MinVal          -7
+ MaxVal          23
+ MinLoc           3           4
+ MaxLoc           4           4
+ Sum          77

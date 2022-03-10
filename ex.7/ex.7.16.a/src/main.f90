@@ -4,19 +4,22 @@ program main
   implicit none
   
 character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  character(:), allocatable  :: fmt
-  integer                    :: In = 0, Out = 1
-  real(R_)                   :: a, b, z
+  integer                  :: In = 0, Out = 0, size
+  integer, allocatable    :: A(:,:)
 
   open (file=input_file, newunit=In)
-  read (In, *) a, b
+    read (In, *) size
+    allocate(A(size, size))
+    read (In, *) A
   close(In)
 
-  z = a + b
-
   open (file = output_file, encoding = E_, newunit = Out)
-  fmt = "(a, T7, '= ', f6.2)"
-  write (Out, fmt) "z=", z
+    write (Out, *) "MinVal", MinVal((A))
+    write (Out, *) "MaxVal", MaxVal((A))
+    write (Out, *) "MinLoc", MinLoc((A))
+    write (Out, *) "MaxLoc", MaxLoc((A))
+    write (Out, *) "Sum", Sum((A))
+
   close (Out)
   
 end program main
