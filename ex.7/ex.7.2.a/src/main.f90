@@ -20,8 +20,6 @@ program main
     Mask = A > 0
 
     A=[Pack(A, .not. Mask), Pack(A, Mask)]
-    
-    print *, A
 
     do i = 1, N
     if (A(i) <= 0) then
