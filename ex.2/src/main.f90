@@ -8,6 +8,8 @@ program main
     integer                    :: In = 0, Out = 0
     real(R_)                   :: a = 0, b = 0, c = 0, d = 0, x = 0, w = 0, func = 0, dig = 0
 
+
+
     open (file=input_file, newunit=In)
         read (In, *) a, b, c, d, x, w
     close(In)
@@ -23,13 +25,12 @@ program main
    if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
         func = F(x, w, dig)
    else 
-        write(*, *) "Error message: ", errorType
+        write(*, *) "Error massage: ", errorType
    end if
-   
+
    open (file=output_file, encoding=E_, newunit=Out, position='append')
         write (Out, "('y(x,w) = ', f0.2)") func
    close (Out)
-
 contains
 
     pure function F(x, w, dig)
@@ -43,7 +44,6 @@ contains
         else 
             F = IEEE_Value(x, IEEE_Quiet_NaN)
         end if
-
     end function F
     
 end program main
