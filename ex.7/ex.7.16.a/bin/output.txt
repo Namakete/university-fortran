@@ -1,5 +1,8 @@
- MinVal          -7
- MaxVal          23
- MinLoc           3           4
- MaxLoc           4           4
- Sum          77
+ Array
+   1.0   2.0   3.0   4.0
+   6.0   5.0   4.0   3.0
+   3.0   4.0   5.0   6.0
+   8.0   7.0   6.0   5.0
+   5.0   6.0   7.0   8.0
+ Minimax element value by columns
+   4.0
