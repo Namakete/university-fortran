@@ -11,9 +11,7 @@ character(*), parameter    :: input_file = "../data/input.txt", output_file = "o
     read (In, *) a, b, h
   close(In)
   
-  dx = (0.8 * x *)
 
-  h = trap_f(a, b, n)
 
 
 
