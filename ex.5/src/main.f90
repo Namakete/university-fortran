@@ -1,48 +1,40 @@
 program main
   use environment
-
   implicit none
+
+  character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                 :: Size = 0, Out = 0, In = 0, i = 0 
+  integer, allocatable    :: X(:), Indexes(:), NegativeIndexes(:), NegativeArray(:)
+  logical, allocatable    :: mask(:)
+
+  open (file=input_file, newunit=In)
+      read(In, *) Size
+      allocate(X(Size))
+      read(In, *) X(:)
+  close (In)
+
+  Indexes = [(i, i = 1, Size)]
   
-  character(*), parameter      :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                    :: In = 0, Out = 0, N = 0, M = 0
-  logical                    :: mask = .true.
-  integer, allocatable       :: X(:), Mat(:), Slice(:)
-  logical, allocatable       :: Neg(:)
-
-  open (file=input_file, newunit = In)
-    read (In, *) N
-    allocate(X(N))
-    read(in,*) X
-  close(In)
-
-  Mat = X
-  Slice = pack(Mat, Mask)
-
-  allocate(Neg(N))
-  call Negative(Slice, Neg, M)
-
   open (file=output_file, encoding=E_, newunit=Out)
-  write (Out, "(/(i0, 1x))") X
-  write (Out, '(/1(a, T11, ": ", i0))') 'Array Size', N
-  write (Out, '(1(a, T21, ": ", i0/))') 'Value negative items', M
+    write(Out,*) 'Indexes'
+    write (Out, '('//Size//'i4)') Indexes
+    write(Out,*) 'Array'
+    write (Out, '('//Size//'i4)') X
   close (Out)
 
-contains
+  mask = X < 0
 
-  pure subroutine Negative(X, Neg, M)
-    integer     X(:), M
-    logical     Neg(:)
-    intent(in)  X
-    intent(Out) Neg, M
+  NegativeIndexes = pack(Indexes, mask)
+  NegativeArray =  pack(X, mask)
 
-    Neg = X < 0
-    M = Count(Neg)
 
- end subroutine Negative
+  open (file=output_file, encoding=E_, newunit=Out, position='append')
+      write(Out, *) 'Negative indexes'
+      write(Out, '('//Size//'i4)') NegativeIndexes
+      write(Out, *) 'Negative array'
+      write(Out, '('//Size//'i4)') NegativeArray
+  close (Out)
 
 end program main
-
-
-
 
 
