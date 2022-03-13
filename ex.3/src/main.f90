@@ -21,8 +21,10 @@ program main
     rows_sum = sum(A,dim=2)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, '(A,4(i4))') 'sum rows:', rows_sum
-        write(Out, '(A,4(i4))') 'sum columns:',  columns_sum 
+        write(Out, *) 'sum rows'
+        write(Out, '('//rows//'i4)') rows_sum
+        write(Out, *) 'sum columns'
+        write(Out, '('//rows//'i4)') columns_sum 
     close (Out) 
 
 end program main
