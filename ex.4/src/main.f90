@@ -23,7 +23,7 @@ program lab4_5a
   allocate(X(H))
 
   X = [((a+n*(i+1)/2), i = 1, H)]
-
+  
   Integral = n*Sum(0.8*(X)*(-exp(X**2+.5_R_)))
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
