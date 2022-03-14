@@ -3,20 +3,29 @@ program main
 
   implicit none
   
-character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  character(:), allocatable  :: fmt
-  integer                    :: In = 0, Out = 1
-  real(R_)                   :: a, b, z
+character(*), parameter           :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                         :: In = 0, Out = 0, rows = 0, columns = 0, i = 0, MaxElement = 0
+  integer, allocatable, target    :: A(:,:)
+  integer, contiguous, pointer    :: B(:)
 
-  open (file=input_file, newunit=In)
-  read (In, *) a, b
-  close(In)
+  Open (file=input_file, newunit=In)
+    read (In, *) rows, columns
+    allocate (A(rows, columns))
+    read (In, *) (A(i, :), i = 1, rows)
+  close (In)
 
-  z = a + b
+  open (file=output_file, encoding=E_, newunit=Out)
+      write (Out, '('//columns//'i4)') (A(i, :), i = 1, rows)
+  close (Out)
 
-  open (file = output_file, encoding = E_, newunit = Out)
-  fmt = "(a, T7, '= ', f6.2)"
-  write (Out, fmt) "z=", z
+  B(1:Size(A)) => A
+
+  do i = 1, Size(B, dim = 1)
+    if (B(i) > MaxElement) MaxElement = B(i)
+  end do
+
+  open (file=output_file, encoding=E_, newunit=Out, position='append')
+    write(Out, *) "Max elemets: ", MaxElement
   close (Out)
   
 end program main
