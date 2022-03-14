@@ -5,8 +5,9 @@ FOPT=-O3 -ftree-vectorize -fopt-info-vec
 debug:
 	mkdir -p bin obj
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
+	$(FC) $(FFLAGS) -c src/mxele.f90 -J obj/ -o obj/mxele.o
 	$(FC) $(FFLAGS) $(FOPT) -c src/main.f90 -I obj/ -o obj/main.o
-	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/environment.o obj/main.o
+	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/mxele.o ./obj/environment.o obj/main.o
 
 clean:
 	rm -rf obj/*

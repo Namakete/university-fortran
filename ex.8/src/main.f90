@@ -1,10 +1,11 @@
 program main
   use environment
+  use MaxEleFind
 
   implicit none
   
-character(*), parameter           :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                         :: In = 0, Out = 0, rows = 0, columns = 0, i = 0, MaxElement = 0
+  character(*), parameter           :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                         :: In = 0, Out = 0, rows = 0, columns = 0, i = 0, Res = 0
   integer, allocatable, target    :: A(:,:)
   integer, contiguous, pointer    :: B(:)
 
@@ -20,12 +21,10 @@ character(*), parameter           :: input_file = "../data/input.txt", output_fi
 
   B(1:Size(A)) => A
 
-  do i = 1, Size(B, dim = 1)
-    if (B(i) > MaxElement) MaxElement = B(i)
-  end do
+  call max_ele_find(B, Res)
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
-    write(Out, *) "Max elemets: ", MaxElement
+    write(Out, *) "Max elemets: ", Res
   close (Out)
   
 end program main

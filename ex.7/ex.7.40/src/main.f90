@@ -3,7 +3,7 @@ program main
 
   implicit none
   
-character(*), parameter           :: input_file = "../data/input.txt", output_file = "output.txt"
+  character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
   integer                         :: In = 0, Out = 1, rows = 0, columns = 0, i = 0
   integer, allocatable, target    :: A(:,:)
   integer, contiguous, pointer    :: B(:)
@@ -25,20 +25,20 @@ character(*), parameter           :: input_file = "../data/input.txt", output_fi
 
   Indexes = [(i, i = 1, Size(B))] 
 
+  print *, Indexes
+
   Mask = (Mod(Indexes, 2) == 0)
 
   MTIndexes = pack(B, mask)
 
-  print *, MTIndexes
-
   do i = 1, Size(MTIndexes)
-    if (MTIndexes(i) < 1) Elements = MTIndexes(i)
+    if (MTIndexes(i) < 1) then 
+      Elements = MTIndexes(i)
+    end if
   end do
 
-  print *, Elements
-
   open (file=output_file, encoding=E_, newunit=Out, position='append')
-    write (Out, *)
+    write (Out, *) 'Answer: ',Elements
   close (Out)
   
 end program main
