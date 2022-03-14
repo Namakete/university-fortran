@@ -1,6 +1,5 @@
 program lab4_5a
   use Environment
-  use ieee_arithmetic
 
   implicit none
   character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
