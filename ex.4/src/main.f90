@@ -1,43 +1,36 @@
-program main
-  use environment
+program lab4_5a
+  use Environment
+  use ieee_arithmetic
 
   implicit none
-  
-character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                    :: In = 0, Out = 0
-  real(R_)                   :: a = 0, b = 0, n = 100, h = 0, dx = 0
+  character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                 :: In=0, Out=1, i = 0, H = 0
+  real(R_)                :: a = 0, b = 0             !границы интегрирования
+  real(R_)                :: n                        !шаг  
+  real(R_),allocatable    :: X(:)                     !Массив точек вектора
+  real(R_)                :: Integral
 
-  open (file=input_file, newunit=In)
-    read (In, *) a, b, h
+  open(newunit=In, file=input_file)
+     read(In, *) a, b, n
   close(In)
+
+  open (file=output_file, encoding=E_, newunit=Out)
+      write (Out, '(3(a, T4, "= ", f0.4/))') "a", a, "b", b, "h", n
+   close (Out)
+
+  H = Int((b-a)/n)
   
+  allocate(X(H))
 
+  X = [((a+n*(i+1)/2), i = 1, H)]
 
+  Integral = n*Sum(0.8*(X)*(-exp(X**2+.5_R_)))
 
+  open (file=output_file, encoding=E_, newunit=Out, position='append')
+     write(Out,*) "The integral is", Integral
+  close(Out)
 
-
-
-
-
-
-  open (file = output_file, encoding = E_, newunit = Out)
-    write (Out, *) "Trapez: "
-  close (Out)
-
-contains 
-
-  !Формлу трапеций, которая вычисляет длину каждого
-  !маленького отрезка или шага
-  pure function trap_f(a, b, n)
-    real(R_) trap_f, a, b, n
-    intent(in) a, b, n
-
-    trap_f = ((b - a) / n)
-
-  end function trap_f
-
-end program main
-
+end program lab4_5a 
 
 
 
