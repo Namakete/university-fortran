@@ -19,10 +19,10 @@ program main
     close (Out)
 
     Mask = A <= 0
-
+   
     Negatives = count(mask)
 
-    A=[Pack(A, .not. Mask), Pack(A, Mask)]
+    A = [Pack(A, Mask), Pack(A, .not. Mask)]
    
     do i = 1, negatives
         MinPos = minloc(A(i:negatives), dim = 1)
