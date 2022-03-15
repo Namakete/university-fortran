@@ -4,9 +4,9 @@ program main
   implicit none
   character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
   integer                 :: In = 0, Out = 0, i = 0, H = 0
-  real(R_)                :: a = 0, b = 0             !границы интегрирования
-  real(R_)                :: n                        !шаг  
-  real(R_),allocatable    :: X(:)                     !Массив точек вектора
+  real(R_)                :: a = 0, b = 0             
+  real(R_)                :: n                          
+  real(R_),allocatable    :: X(:)                    
   real(R_)                :: Integral
 
   open(newunit=In, file=input_file)

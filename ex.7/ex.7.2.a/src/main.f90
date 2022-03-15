@@ -18,15 +18,15 @@ program main
         write (Out, '('//Size//'i4)') A(:)
     close (Out)
 
-    Mask = A >= 0
+    Mask = A <= 0
 
     Negatives = count(mask)
 
     A=[Pack(A, .not. Mask), Pack(A, Mask)]
-
+   
     do i = 1, negatives
         MinPos = minloc(A(i:negatives), dim = 1)
-        if (MinPos > 1) then
+        if (MinPos /= 1) then
             A(i:negatives) = cshift(A(i:negatives), MinPos - 1)
         endif
     enddo

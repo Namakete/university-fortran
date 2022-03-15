@@ -22,19 +22,19 @@ program main
 
   B(1:Size(A)) => A
     
-print *, B
+!print *, B
 
   Indexes = [(i, i = 1, Size(B))] 
 
-print *, Indexes
+!print *, Indexes
 
   Mask = (Mod(Indexes, 2) == 0)
 
-print *, Mask
+!print *, Mask
 
   MTIndexes = pack(B, mask)
 
-print *, MTIndexes
+!print *, MTIndexes
 
   do i = 1, Size(MTIndexes)
     if (MTIndexes(i) < 1) then 
