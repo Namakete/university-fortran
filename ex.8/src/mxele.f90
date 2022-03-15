@@ -1,15 +1,19 @@
-module MaxEleFind
+module MaxMinEleFind
     use Environment
     implicit none
 
 contains
-    pure subroutine max_ele_find(B, Res)
+    pure subroutine max_ele_find(B, Max)
         integer, intent(in)  :: B(:)
-        integer, intent(inout) :: Res
-        integer  :: i
+        integer, intent(inout) :: Max
         
-        do i = 1, Size(B)
-            if (B(i) > Res) Res = B(i)
-        end do
+        Max = MaxVal(B, dim = 1)
     end subroutine max_ele_find
-end module MaxEleFind
+
+    pure subroutine min_ele_find(B, Min)
+        integer, intent(in)  :: B(:)
+        integer, intent(inout) :: Min
+        
+        Min = MinVal(B, dim = 1)
+    end subroutine min_ele_find
+end module MaxMinEleFind

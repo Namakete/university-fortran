@@ -27,8 +27,8 @@ program main
   do i = 1, rows
     TempRow = A(1,:)
     TempRow = TempRow(i:rows) 
-    max_num = maxloc(TempRow, dim =1)
-
+    max_num = maxloc(TempRow, dim = 1)
+    
     TempA = A(:,i) 
     A(:,i) = A(:, max_num+i-1)
     A(:, max_num+i-1) = TempA
@@ -40,9 +40,9 @@ program main
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
     write(Out, *) 'index of maximum element in bounds from and to rows'
-    write (Out, '('//columns//'i4)') (Indexes(I), I = 1, rows )
+    write (Out, '('//columns//'i4)') (Indexes(i), i = 1, rows )
     write(Out, *) 'Sorted array'
-    write (Out, '('//rows//'i4)') ((A(I, J), J = 1, rows ), I = 1, columns)
+    write (Out, '('//rows//'i4)') ((A(i, j), j = 1, rows ), i = 1, columns)
   close (Out)
 
 end program main

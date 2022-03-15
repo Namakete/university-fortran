@@ -23,6 +23,7 @@ program main
   close (Out)
 
   mask = X < 0
+  print *, mask
 
   NegativeIndexes = pack(Indexes, mask)
   NegativeArray =  pack(X, mask)
