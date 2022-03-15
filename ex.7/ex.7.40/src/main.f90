@@ -10,7 +10,6 @@ program main
   logical, allocatable            :: Mask(:)
   integer, allocatable            :: Indexes(:), MTIndexes(:), Elements(:)
   
-
   open (file=input_file, newunit=In)
     read (In, *) rows, columns
     allocate (A(rows, columns))
@@ -22,18 +21,24 @@ program main
   close (Out)
 
   B(1:Size(A)) => A
+    
+print *, B
 
   Indexes = [(i, i = 1, Size(B))] 
 
-  print *, Indexes
+print *, Indexes
 
   Mask = (Mod(Indexes, 2) == 0)
 
+print *, Mask
+
   MTIndexes = pack(B, mask)
+
+print *, MTIndexes
 
   do i = 1, Size(MTIndexes)
     if (MTIndexes(i) < 1) then 
-      Elements = MTIndexes(i)
+      print *, MTIndexes(i)
     end if
   end do
 

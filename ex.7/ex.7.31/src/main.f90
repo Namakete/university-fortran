@@ -3,26 +3,49 @@ program main
 
   implicit none
   
-character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  character(:), allocatable  :: fmt
-  integer                    :: In = 0, Out = 1
-  real(R_)                   :: a, b, z
+  character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
+  integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, j = 0, max_num = 0, temp = 0 
+  integer, allocatable       :: A(:,:), Indexes(:), TempRow(:), TempA(:)
+
 
   open (file=input_file, newunit=In)
-  read (In, *) a, b
-  close(In)
+    read(In, *) rows, columns
+    allocate(A(columns,rows))
+    allocate(Indexes(columns))
+    read(In, *) (A(i,:), i = 1, columns)
+  close (In)
 
-  z = a + b
-
-  open (file = output_file, encoding = E_, newunit = Out)
-  fmt = "(a, T7, '= ', f6.2)"
-  write (Out, fmt) "z=", z
+  open (file=output_file, encoding=E_, newunit=Out)
+      write(Out, *) 'Array'
+      write (Out, '('//rows//'i4)') (A(i, :), i = 1, columns)
   close (Out)
+
+  do i = 1, rows
+    Indexes(i) = i
+  end do
   
+  do i = 1, rows
+    TempRow = A(1,:)
+    TempRow = TempRow(i:rows) 
+    max_num = maxloc(TempRow, dim =1)
+
+    TempA = A(:,i) 
+    A(:,i) = A(:, max_num+i-1)
+    A(:, max_num+i-1) = TempA
+
+    temp = Indexes(i)
+    Indexes(i) = Indexes(max_num+i-1)
+    Indexes(max_num+i-1) = temp
+  end do
+
+  open (file=output_file, encoding=E_, newunit=Out, position='append')
+    write(Out, *) 'index of maximum element in bounds from and to rows'
+    write (Out, '('//columns//'i4)') (Indexes(I), I = 1, rows )
+    write(Out, *) 'Sorted array'
+    write (Out, '('//rows//'i4)') ((A(I, J), J = 1, rows ), I = 1, columns)
+  close (Out)
+
 end program main
-
-
-
 
 
 

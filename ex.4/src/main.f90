@@ -1,4 +1,4 @@
-program lab4_5a
+program main
   use Environment
 
   implicit none
@@ -21,7 +21,7 @@ program lab4_5a
   
   allocate(X(H))
 
-  X = [((a+n*(i+1)/2), i = 1, H)]
+  X = [((a+n*(i+1)), i = 1, H)]
 
   Integral = n*Sum(0.8*(X)*(-exp(X**2+.5_R_)))
 
@@ -29,7 +29,7 @@ program lab4_5a
      write(Out,*) "The integral is", Integral
   close(Out)
 
-end program lab4_5a 
+end program main
 
 
 

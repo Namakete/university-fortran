@@ -2,4 +2,4 @@ a  = .0000
 b  = 1.0000
 h  = .0100
 
- The integral is -0.387391895    
+ The integral is  -1.18800783    
