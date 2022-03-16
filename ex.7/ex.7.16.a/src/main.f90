@@ -20,7 +20,7 @@ program lab7_15a
     call MinMaxElement(A,Z)
     
     open (file=output_file, encoding=e_, newunit=out, position="append")
-        write (Out, * ) 'Minimax element value by columns'
+        write (Out, * ) 'Min element value by columns'
         write (Out,"(f6.1)") Z
     close (out)
 
@@ -36,7 +36,6 @@ contains
     end subroutine MinMaxElement
 
 end program lab7_15a
-
 
 
 

@@ -23,11 +23,9 @@ program main
   close (Out)
 
   mask = X < 0
-  print *, mask
 
   NegativeIndexes = pack(Indexes, mask)
   NegativeArray =  pack(X, mask)
-
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
       write(Out, *) 'Negative indexes'

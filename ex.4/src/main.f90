@@ -17,13 +17,13 @@ program main
       write (Out, '(3(a, T4, "= ", f0.4/))') "a", a, "b", b, "h", n
    close (Out)
 
-  H = Int((b-a)/n)
-  
+  H = Int(((b-a)/n+.5_R_)/2)
+
   allocate(X(H))
 
-  X = [((a+n*(i+1)), i = 1, H)]
+  X = [((a/2)+2*(a+n*(i-1)), i = 1, H)]
 
-  Integral = n*Sum(0.8*(X)*(-exp(X**2+.5_R_)))
+  Integral = n*Sum(.8_R_*(X)*(-exp(X**2+.5_R_)))
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
      write(Out,*) "The integral is", Integral

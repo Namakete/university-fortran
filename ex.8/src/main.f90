@@ -24,8 +24,6 @@ program main
   call max_ele_find(B, Max)
   call min_ele_find(B, Min)
 
-  print *, MinVal(B)
-
   open (file=output_file, encoding=E_, newunit=Out, position='append')
     write(Out, *) "Max elemets: ", Max
     write(Out, *) "Min elemets: ", Min

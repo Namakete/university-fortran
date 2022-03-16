@@ -39,7 +39,7 @@ program main
   end do
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
-    write (Out, *) 'Answer: ',Elements
+    write (Out, *) 'Answer: ', Elements
   close (Out)
   
 end program main
