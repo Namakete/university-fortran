@@ -8,8 +8,8 @@ program main
   integer, allocatable, target    :: A(:,:)
   integer, contiguous, pointer    :: B(:)
   logical, allocatable            :: Mask(:)
-  integer, allocatable            :: Indexes(:), MTIndexes(:), Elements(:)
-  
+  integer, allocatable            :: Indexes(:), MTIndexes(:), MTElements(:) 
+
   open (file=input_file, newunit=In)
     read (In, *) rows, columns
     allocate (A(rows, columns))
@@ -21,28 +21,31 @@ program main
   close (Out)
 
   B(1:Size(A)) => A
-!print *, B
 
   Indexes = [(i, i = 1, Size(B))] 
-!print *, Indexes
 
-  Mask = (Mod(Indexes, 2) == 0)
-!print *, Mask
+  Mask = ((Mod(Indexes, 2) == 0) .and. (B < 1))
 
-  MTIndexes = pack(B, mask)
-!print *, MTIndexes
-
-  do i = 1, Size(MTIndexes)
-    if (MTIndexes(i) < 1) then 
-      print *, MTIndexes(i)
-    end if
-  end do
+  MTIndexes = pack(Indexes, mask)
+  MTElements = pack(B, mask)
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
-    write (Out, *) 'Answer: ', Elements
+    write(Out, *) 'Indexes'
+    write (Out, '('//columns//'i4)') MTIndexes
+    write(Out, *) 'Elements'
+    write (Out, '('//columns//'i4)') MTElements
   close (Out)
   
 end program main
+
+
+
+
+
+
+
+
+
 
 
 
