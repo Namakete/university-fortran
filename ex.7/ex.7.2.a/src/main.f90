@@ -3,7 +3,7 @@ program main
 
     implicit none
     character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                 :: In = 0, Out = 0, i, Size = 0, Negatives = 0, MinPos = 0
+    integer                 :: In = 0, Out = 0, Size = 0, Negatives = 0
     integer, allocatable   :: A(:)
     logical, allocatable    :: Mask(:)
 
@@ -24,17 +24,28 @@ program main
 
     A = [Pack(A, Mask), Pack(A, .not. Mask)]
    
-    do i = 1, negatives
-        MinPos = minloc(A(i:negatives), dim = 1)
-        if (MinPos /= 1) then
-            A(i:negatives) = cshift(A(i:negatives), MinPos - 1)
-        endif
-    enddo
+    call Sort(Negatives, A)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
         write (Out, *) 'Sort array'
         write (Out, '('//Size//'i4)') A(:)
     close (Out)
+
+contains 
+
+pure subroutine Sort(Negatives, A)
+    integer Negatives, A(:)
+    intent(in) Negatives
+    intent(out) A
+    integer i, MinPos
+
+    do i = 1, Negatives
+        MinPos = minloc(A(i:Negatives), dim = 1)
+        if (MinPos /= 1) then
+            A(i:Negatives) = cshift(A(i:Negatives), MinPos - 1)
+        end if
+    end do
+end subroutine Sort
 
 end program main
 
