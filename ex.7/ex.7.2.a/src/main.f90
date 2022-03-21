@@ -23,7 +23,7 @@ program main
     Negatives = count(mask)
 
     A = [Pack(A, Mask), Pack(A, .not. Mask)]
-   
+
     call Sort(Negatives, A)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')

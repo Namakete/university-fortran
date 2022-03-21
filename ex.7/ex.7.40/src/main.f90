@@ -24,8 +24,8 @@ program main
 
   B(1:Size(C)) => C
 
-  Indexes = [(i, i = 1, Size(B))] 
-!
+  Indexes = [(i, i = 1, Size(B))]
+
   Mask = ((Mod(Indexes, 2) == 0) .and. (B < 1))
 
   MTIndexes = pack(Indexes, mask)

@@ -15,7 +15,8 @@ program main
       write (Out, '(3(a, T4, "= ", f0.4/))') "a", a, "b", b, "h", h
    close (Out)
 
-  N = Int(((b-a)/h+.5_R_)/2)
+  N = NInt((b-a)/h) + 1
+
 
   allocate(X(N))
   call Integral(a, h, X, I)
@@ -32,9 +33,9 @@ contains
       intent(out) X, I
       integer j
 
-      X = [((a/2)+2*(a+h*(j-1)), j = 1, Size(X))]
+      X = [(((a/2)+(j-1)*h, j = 1, Size(X))]
       X = .8_R_* X *(-exp(X**2+.5_R_))
-      I = Sum(X) * h
+      I = Sum(X) * (h/2)
    end subroutine Integral
 
 end program main

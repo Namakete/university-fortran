@@ -1,4 +1,4 @@
-program lab7_15a
+program main
     use Environment
     implicit none
     character(*), parameter     :: input_file = "../data/input.txt" , output_file = "output.txt"
@@ -16,7 +16,7 @@ program lab7_15a
         write (out,*)"Array"
         write (out, "("//columns//"f6.1)") (A(i,:), i = 1, rows)
     close (out)
-
+    
     call MinMaxElement(A,Z)
     
     open (file=output_file, encoding=e_, newunit=out, position="append")
@@ -35,7 +35,7 @@ contains
         Z = Minval(Maxval(A, dim = 2))
     end subroutine MinMaxElement
 
-end program lab7_15a
+end program main
 
 
 
