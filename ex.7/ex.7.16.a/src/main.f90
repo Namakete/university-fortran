@@ -32,7 +32,7 @@ contains
         intent(in) A
         intent(out) Z
 
-        Z = Minval(Maxval(A, dim = 2))
+        Z = Minval(Maxval(A, dim = 1))
     end subroutine MinMaxElement
 
 end program main
