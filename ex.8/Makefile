@@ -6,8 +6,9 @@ debug:
 	mkdir -p bin obj
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
 	$(FC) $(FFLAGS) -c src/findMaxMinElements.f90 -J obj/ -o obj/findMaxMinElements.o
+	$(FC) $(FFLAGS) -c src/matrix_IO.f90 -J obj/ -o obj/matrix_IO.o
 	$(FC) $(FFLAGS) $(FOPT) -c src/main.f90 -I obj/ -o obj/main.o
-	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/findMaxMinElements.o ./obj/environment.o obj/main.o
+	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/matrix_IO.o ./obj/findMaxMinElements.o ./obj/environment.o obj/main.o
 
 clean:
 	rm -rf obj/*
