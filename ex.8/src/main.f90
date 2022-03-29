@@ -2,8 +2,7 @@ program main
     use environment
     use FindMaxMinElements
     use Matrix_IO
-
-
+    
     implicit none
 
     character(*), parameter         :: output_file = "output.txt", input_file_A = "../data/A.txt", input_file_C = "../data/C.txt"
@@ -24,8 +23,6 @@ program main
     MPC(1:Size(C)) => C
     call fina_max_min_elements(MPC, Max, Min)
     call OutputMaxMinElements(output_file, Max, Min)
-
-
    
 end program main
 

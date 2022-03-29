@@ -40,6 +40,5 @@ contains
         write(Out, *) "Max elemets: ", Max
         write(Out, *) "Min elemets: ", Min
     close (Out)
-
    end subroutine OutputMaxMinElements
 end module Matrix_IO
