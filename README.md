@@ -14,13 +14,17 @@ Peter the Great St.Petersburg Polytechnic University
 - [x] [Exercise 7](https://github.com/Namakete/university-fortran/blob/main/ex.7/ex.7.40/src/main.f90) - v.40
 - [x] [Exercise 8](https://github.com/Namakete/university-fortran/blob/main/ex.8.11/src/main.f90) - v.11
 
+## NeoVim
+I use [neovim](https://neovim.io/) as an editor with [personal configurations](https://github.com/Namakete/personal-dotfiles/tree/main/nvim)
+
 ## Compiling projects
 Each project contains a [makefile](https://github.com/Namakete/university-fortran/blob/main/ex.1.1/Makefile) that contains **commands**, **keys** and **scripts** for compiling the project.
 
-Basic commands for compiling a project.
+Basic commands for compiling a project:
 
-```make debug``` - build project components
+- ```make debug``` - build project
 
-```make run``` - run the project
+- ```make run``` - run the project
 
-```make clean``` - removes project build files.
+- ```make clean``` - removes project build files
+
