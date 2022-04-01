@@ -4,7 +4,6 @@ program main
     implicit none
   
     character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-    character(:), allocatable  :: fmt
     integer                    :: In = 0, Out = 1
     real(R_)                   :: a, b, c, d, e, f, m1, m2
   
@@ -17,12 +16,12 @@ program main
     else
       m1 = f1(b, c, e, f) / denominator(a, b, d, e)
       m2 = f2(a, c, d, f) / denominator(a, b, d, e)
+    end if 
       
     open (file = output_file, encoding = E_, newunit = Out)
-        write (Out, '(a, T7, '= ', f6.2)') "f1", m1
-        write (Out, '(a, T7, '= ', f6.2)') "f2", m2
+        write (Out, *) "f1", m1
+        write (Out, *) "f2", m2
     close (Out)
-    end if
 
     contains
 
