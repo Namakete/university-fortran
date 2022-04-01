@@ -1,11 +1,10 @@
 program main
     use environment
-  
     implicit none
     
     character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                         :: In = 0, Out = 1, N = 0, i = 0, j = 0, integer
-    integer, allocatable            :: C(:,:), B(:),MTElements(:)
+    integer                         :: In = 0, Out = 1, N = 0, i = 0, j = 0
+    integer, allocatable            :: C(:,:), B(:), MTElements(:)
     logical, allocatable            :: Mask(:)
      
     open (file=input_file, newunit=In)
@@ -17,9 +16,9 @@ program main
     open (file=output_file, encoding=E_, newunit=Out)
         write (Out, '('//N//'i4)') (C(i, :), i = 1, N)
     close (Out)
-
-    B = [(C(mod(i,2)+1::2, i), i = 1, N)]
-    Mask = B < 0 
+    
+    B = [((C(i,j)*mod(i+j,2),i=1,N),j=1,N)]
+    Mask = B < 0
     MTElements = Pack(B, Mask)
     
     open (file=output_file, encoding=E_, newunit=Out, position='append')
