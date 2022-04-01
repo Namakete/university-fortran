@@ -14,11 +14,8 @@ program main
  
 
   open (file = output_file, encoding = E_, newunit = Out)
-    write(Out, '(10F10.2)')
+    write(Out, *)
   close (Out)
-  
-contains
-
   
 end program main
 
