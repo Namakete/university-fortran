@@ -1,4 +1,4 @@
-# Fortran programming [algorithmization and programming]
+# Fortran programming
 ### Completed tasks
 
 - [x] [Exercise 1](https://github.com/Namakete/university-fortran/blob/main/ex.1.1/src/main.f90) - v.1
