@@ -1,5 +1,5 @@
 # Fortran programming
-Peter the Great St.Petersburg Polytechnic University
+Peter the Great St.Petersburg Polytechnic University.
 
 ## Completed tasks
 - [x] [Exercise 1](https://github.com/Namakete/university-fortran/blob/main/ex.1.1/src/main.f90) - v.1
@@ -15,7 +15,7 @@ Peter the Great St.Petersburg Polytechnic University
 - [x] [Exercise 8](https://github.com/Namakete/university-fortran/blob/main/ex.8.11/src/main.f90) - v.11
 
 ## NeoVim
-I use [neovim](https://neovim.io/) as an editor with [personal configurations](https://github.com/Namakete/personal-dotfiles/tree/main/nvim)
+I use [neovim](https://neovim.io/) as an editor with [personal configurations](https://github.com/Namakete/personal-dotfiles/tree/main/nvim).
 
 ## Compiling projects
 Each project contains a [makefile](https://github.com/Namakete/university-fortran/blob/main/ex.1.1/Makefile) that contains **commands**, **keys** and **scripts** for compiling the project.
