@@ -11,7 +11,6 @@ program main
     read (In, *) x
   close(In)
 
- 
 
   open (file = output_file, encoding = E_, newunit = Out)
     write(Out, *)

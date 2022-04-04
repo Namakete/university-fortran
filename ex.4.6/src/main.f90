@@ -3,40 +3,38 @@ program main
 
   implicit none
   character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                 :: In = 0, Out = 0, N = 0
-   real(R_)                :: a = 0, b = 0, h = 0, I = 0
-   real(R_), allocatable   :: X(:)                  
+  integer                 :: In = 0, Out = 0, n = 0, i
+  real(R_)                :: h = 0, s = 0
+  real(R_), allocatable   :: X(:)                  
 
   open(newunit=In, file=input_file)
-     read(In, *) a, b, h
+     read(In, *)  h
   close(In)
 
   open (file=output_file, encoding=E_, newunit=Out)
-      write (Out, '(3(a, T4, "= ", f0.4/))') "a", a, "b", b, "h", h
+      write (Out, '(1(a, T4, "= ", f0.4/))') "h", h
    close (Out)
 
-  N = NInt((b-a)/h) + 1
+   n = NInt(1._R_/h)
 
-
-  allocate(X(N))
-  call Integral(a, h, X, I)
+   X = [(f(h*i), i=0,n)]
+   X(1) = X (1)*.5_R_
+   X(N+1) = X (N+1)*.5_R_
+  !print *, X 
+   s = h * sum(X)
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
-     write(Out,*) "The integral is ", I
+     write(Out,*) "The integral is ", s
   close(Out)
 
 contains
 
-   pure subroutine Integral(a, h, X, I)
-      real(R_) a, h, X(:), I
-      intent(in) a, h
-      intent(out) X, I
-      integer j
+pure function f (x) result(r)
+    real(R_), intent(in) :: x
+    real(R_) :: r
 
-      X = [(((a/2)+(j-1)*h, j = 1, Size(X))]
-      X = .8_R_* X *(-exp(X**2+.5_R_))
-      I = Sum(X) * (h/2)
-   end subroutine Integral
+    r = .8_R_*x*exp(-(x*x+.5_R_))
+end function f 
 
 end program main
 

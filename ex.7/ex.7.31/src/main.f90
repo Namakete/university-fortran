@@ -23,12 +23,12 @@ program main
   do i = 1, rows
     Indexes(i) = i
   end do
-  
+
   do i = 1, rows
     TempRow = A(1,:)
     TempRow = TempRow(i:rows) 
     max_num = maxloc(TempRow, dim = 1)
-    
+
     TempA = A(:,i) 
     A(:,i) = A(:, max_num+i-1)
     A(:, max_num+i-1) = TempA
