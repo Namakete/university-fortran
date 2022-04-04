@@ -7,7 +7,7 @@ Peter the Great St.Petersburg Polytechnic University.
 - [x] [Exercise 3](https://github.com/Namakete/university-fortran/blob/main/ex.3.9/src/main.f90) - v.9
 - [x] [Exercise 4](https://github.com/Namakete/university-fortran/blob/main/ex.4.6/src/main.f90) - v.6.a
 - [x] [Exercise 5](https://github.com/Namakete/university-fortran/blob/main/ex.5.14.b/src/main.f90) - v.14.b
-- [ ] [Exercise 6](https://github.com/Namakete/university-fortran/blob/main/ex.6.3/src/main.f90) - v.3
+- [x] [Exercise 6](https://github.com/Namakete/university-fortran/blob/main/ex.6.3/src/main.f90) - v.3
 - [x] [Exercise 7](https://github.com/Namakete/university-fortran/blob/main/ex.7/ex.7.2.a/src/main.f90) - v.2.a
 - [x] [Exercise 7](https://github.com/Namakete/university-fortran/blob/main/ex.7/ex.7.16.a/src/main.f90) - v.16.a
 - [x] [Exercise 7](https://github.com/Namakete/university-fortran/blob/main/ex.7/ex.7.31/src/main.f90) - v.31
