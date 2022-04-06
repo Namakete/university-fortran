@@ -17,11 +17,16 @@ program main
     open (file=output_file, encoding=E_, newunit=Out)
         write (Out, '('//N//'i4)') (C(i, :), i = 1, N)
     close (Out)
+    
+    B = [C(2::2,::2),C(::2,2::2)]
+    print *, B
 
-    B = [((C(i,j)*mod(i+j,2),i=1,N),j=1,N)]
+    !B = [((C(i,j)*mod(i+j,2),i=1,N),j=1,N)]
     !print *, B
+
     Mask = B < 0
     MTElements = Pack(B, Mask)
+
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
         write(Out, *) 'Elements'
