@@ -18,8 +18,11 @@ program main
         write (Out, '('//N//'i4)') (C(i, :), i = 1, N)
     close (Out)
     
-    B = [C(2::2,::2),C(::2,2::2)]
-    print *, B
+    !B = [(C(mod(i,2)+1::2,i),i=1,3)]
+    !print *, B
+
+    !B = [C(2::2,::2),C(::2,2::2)]
+    !print *, B
 
     !B = [((C(i,j)*mod(i+j,2),i=1,N),j=1,N)]
     !print *, B
