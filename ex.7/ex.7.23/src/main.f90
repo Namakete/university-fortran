@@ -24,4 +24,13 @@ program main
     S(:,1:N-1) = A(:,1:N-1)+A(:,2:N)
     T(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
 
+    do
+      m = maxval (T)
+      loc = maxloc (T)
+      i = loc (1)
+      j = loc (2)
+      T (i, j) = m-1  
+      if (maxval (T) < m) exit
+    end do
+    
 end program main
