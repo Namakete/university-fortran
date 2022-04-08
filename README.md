@@ -1,7 +1,7 @@
 # Fortran programming
 Peter the Great St.Petersburg Polytechnic University.
 
-## Completed tasks
+## Exercises
 - [x] [Exercise 1](https://github.com/Namakete/university-fortran/blob/main/ex.1.1/src/main.f90) - v.1
 - [x] [Exercise 2](https://github.com/Namakete/university-fortran/blob/main/ex.2.19/src/main.f90) - v.19
 - [x] [Exercise 3](https://github.com/Namakete/university-fortran/blob/main/ex.3.9/src/main.f90) - v.9
