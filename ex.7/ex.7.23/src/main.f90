@@ -17,4 +17,7 @@ program main
         write(*, *) 'Input array'
         write (*, '('//N//'i4)') (A(i,:), i = 1,N)
     close(Out)
+
+    allocate (S (N, N-1))
+    allocate (T (N-1, N-1))
 end program main
