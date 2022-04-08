@@ -12,4 +12,9 @@ program main
         allocate (A(N, N))
         read (In, *) (A(i, :), i = 1, N)
     close(In)
+
+    open (file=output_file, encoding=E_, newunit=Out)
+        write(*, *) 'Input array'
+        write (*, '('//N//'i4)') (A(i,:), i = 1,N)
+    close(Out)
 end program main
