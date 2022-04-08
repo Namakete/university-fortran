@@ -32,5 +32,11 @@ program main
       T (i, j) = m-1  
       if (maxval (T) < m) exit
     end do
-    
+
+    open (file=output_file, encoding=E_, newunit=Out, position='append')
+        write(Out, *) 'Coordinates of the maximum element of the matrix'
+        write(Out, *) 'Row:', i, ' Columns:', j
+        write(Out, *) 'Output array'
+        write (Out, '('//N-1//'i4)') (T(i,:), i = 1,N-1)
+    close (Out)
 end program main
