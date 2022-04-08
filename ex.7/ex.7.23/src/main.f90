@@ -20,4 +20,8 @@ program main
 
     allocate (S (N, N-1))
     allocate (T (N-1, N-1))
+
+    S(:,1:N-1) = A(:,1:N-1)+A(:,2:N)
+    T(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
+
 end program main
