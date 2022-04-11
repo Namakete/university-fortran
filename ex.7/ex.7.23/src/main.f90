@@ -4,8 +4,8 @@ program main
     implicit none
 
     character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                         :: In = 0, Out = 1, N = 0, i, j, m, loc (2)
-    integer, allocatable            :: A(:,:), S(:,:), T(:,:)
+    integer                         :: In = 0, Out = 1, N = 0, i = 0, m, k
+    integer, allocatable            :: A(:,:), S(:,:), XY(:,:)
  
     open (file=input_file, newunit=In)
         read (In, *) N
@@ -19,25 +19,24 @@ program main
     close(Out)
 
     allocate (S (N, N-1))
-    allocate (T (N-1, N-1))
+    allocate (XY((N-1)**2, 2))
 
     S(:,1:N-1) = A(:,1:N-1)+A(:,2:N)
-    T(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
-
+    S(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
+    
+    k = 0
     do
-      m = maxval (T)
-      loc = maxloc (T)
-      i = loc (1)
-      j = loc (2)
-      print *, i , j
-      T (i, j) = m-1  
-      if (maxval (T) < m) exit
+      m = maxval (S)
+      k = k+1
+      XY(k,:) = maxloc(S)
+      S (XY(k,1), XY(k,2)) = m-1  
+      if (maxval (S) < m) exit
     end do
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, *) 'Coordinates of the maximum element of the matrix'
-        write(Out, *) 'Row:', i, ' Columns:', j
         write(Out, *) 'Output array'
-        write (Out, '('//N-1//'i4)') (T(i,:), i = 1,N-1)
+        write (Out, '('//N-1//'i4)') (S(i,:), i=1,N-1)
+        write(Out, *) 'Coordinates of the maximum element of the matrix'
+        write (Out, '(2i4/)') (XY(i,:), i=1,k)
     close (Out)
 end program main
