@@ -29,6 +29,7 @@ program main
       loc = maxloc (T)
       i = loc (1)
       j = loc (2)
+      print *, i , j
       T (i, j) = m-1  
       if (maxval (T) < m) exit
     end do

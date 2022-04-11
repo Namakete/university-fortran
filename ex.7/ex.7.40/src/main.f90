@@ -4,9 +4,8 @@ program main
     implicit none
 
     character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                         :: In = 0, Out = 1, N = 0, i = 0, j = 0
-    integer, allocatable            :: C(:,:), B(:), MTElements(:)
-    logical, allocatable            :: Mask(:)
+    integer                         :: In = 0, Out = 1, N = 0, i = 0
+    integer, allocatable            :: C(:,:), B(:)
 
     open (file=input_file, newunit=In)
         read (In, *) N
@@ -17,23 +16,12 @@ program main
     open (file=output_file, encoding=E_, newunit=Out)
         write (Out, '('//N//'i4)') (C(i, :), i = 1, N)
     close (Out)
-    
-    !B = [(C(mod(i,2)+1::2,i),i=1,3)]
-    !print *, B
 
-    !B = [C(2::2,::2),C(::2,2::2)]
-    !print *, B
-
-    !B = [((C(i,j)*mod(i+j,2),i=1,N),j=1,N)]
-    !print *, B
-
-    Mask = B < 0
-    MTElements = Pack(B, Mask)
-
+    B = [(Pack(C(1:N:2,i), C(1:N:2,i)<0), Pack(C(2:N:2,i+1),C(2:N:2,i+1)<0), i=1,N,2)]
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
         write(Out, *) 'Elements'
-        write (Out, '('//N//'i4)') MTElements
+        write (Out, '('//N//'i4)') B
     close (Out)
 
 end program main

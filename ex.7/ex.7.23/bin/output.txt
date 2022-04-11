@@ -1,6 +1,6 @@
  Coordinates of the maximum element of the matrix
- row:           3  columns:           3
+ Row:           3  Columns:           3
  Output array
-  14  18  22
-  30  34  38
-  46  50  53
+   3   3   3
+   3   3   3
+   3   3   3

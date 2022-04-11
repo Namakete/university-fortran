@@ -5,7 +5,7 @@ program main
   
   character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
   integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, j = 0, max_num = 0, temp = 0 
-  integer, allocatable       :: A(:,:), Indexes(:), TempRow(:), TempA(:)
+  integer, allocatable       :: A(:,:), Indexes(:), TempA(:)
 
 
   open (file=input_file, newunit=In)
@@ -20,14 +20,10 @@ program main
       write (Out, '('//rows//'i4)') (A(i, :), i = 1, columns)
   close (Out)
 
-  do i = 1, rows
-    Indexes(i) = i
-  end do
+  Indexes = [(i, i = 1, rows)]
 
   do i = 1, rows
-    TempRow = A(1,:)
-    TempRow = TempRow(i:rows) 
-    max_num = maxloc(TempRow, dim = 1)
+    max_num = maxloc(A(1,i:rows),dim=1)
 
     TempA = A(:,i) 
     A(:,i) = A(:, max_num+i-1)
