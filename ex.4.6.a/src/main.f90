@@ -1,3 +1,5 @@
+! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
+! See the LICENCE file in the repository root for full licence text.
 program main
   use Environment
 
@@ -26,7 +28,6 @@ program main
   close(Out)
 
 contains
-
    pure subroutine Integral(a, h, X, I)
       real(R_) a, h, X(:), I
       intent(in) a, h
@@ -39,7 +40,6 @@ contains
       X(Size(X)) = X (Size(X))*.5_R_
       I = Sum(X) * h
    end subroutine Integral
-
 end program main
 
 
