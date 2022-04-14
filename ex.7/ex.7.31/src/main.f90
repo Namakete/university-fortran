@@ -6,8 +6,8 @@ program main
   implicit none
   
   character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, max_num = 0, temp = 0 
-  integer, allocatable       :: A(:,:), Indexes(:), TempA(:)
+  integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, max_num = 0 
+  integer, allocatable       :: A(:,:), Indexes(:)
 
 
   open (file=input_file, newunit=In)
@@ -26,15 +26,8 @@ program main
 
   do i = 1, rows
     max_num = maxloc(A(1,i:rows),dim=1)+i-1
-
-    temp = Indexes(i)
-    Indexes(i) = Indexes(max_num)
-    Indexes(max_num) = temp
-    
-    A([i, :]) = A([:, i])
-    !TempA = A(:,i) 
-    !A(:,i) = A(:, max_num)
-    !A(:, max_num) = TempA
+    Indexes([i,max_num]) = Indexes([max_num,i])
+    A(:,[i, max_num]) = A(:,[max_num,i])
   end do
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
