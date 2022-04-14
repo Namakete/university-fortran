@@ -1,3 +1,5 @@
+! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
+! See the LICENCE file in the repository root for full licence text.
 program main
     use environment
 
@@ -14,6 +16,7 @@ program main
     close (In)
 
     open (file=output_file, encoding=E_, newunit=Out)
+        write (Out, *) 'Input array'
         write (Out, '('//columns//'i4)') (A(i, :), i = 1, rows)
     close (Out)
     
@@ -21,11 +24,10 @@ program main
     rows_sum = sum(A,dim=2)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, *) 'sum rows'
+        write(Out, *) 'Sum rows'
         write(Out, '('//rows//'i4)') rows_sum
-        write(Out, *) 'sum columns'
+        write(Out, *) 'Sum columns'
         write(Out, '('//rows//'i4)') columns_sum 
     close (Out) 
-
 end program main
 
