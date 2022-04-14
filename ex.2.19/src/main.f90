@@ -1,3 +1,5 @@
+! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
+! See the LICENCE file in the repository root for full licence text.
 program main
     use environment
     use IEEE_Arithmetic
@@ -7,8 +9,6 @@ program main
     character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt", errorType = "Case not provided"
     integer                    :: In = 0, Out = 0
     real(R_)                   :: a = 0, b = 0, c = 0, d = 0, x = 0, w = 0, func = 0, dig = 0
-
-
 
     open (file=input_file, newunit=In)
         read (In, *) a, b, c, d, x, w
