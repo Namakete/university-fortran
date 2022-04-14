@@ -1,9 +1,11 @@
+! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
+! See the LICENCE file in the repository root for full licence text.
 module Matrix_IO
    use Environment
    
    implicit none
 contains
-   ! Matrix reading.
+
    function ReadMatrix(input_file) result(Array)
       character(*), intent(in)   :: input_file
       integer, allocatable      :: Array(:, :)
@@ -17,7 +19,6 @@ contains
       close (In)
    end function ReadMatrix
   
-   ! Output matrix.
    subroutine OutputMatrix(output_file, Array)
       character(*), intent(in)   :: output_file
       integer, intent(in)       :: Array(:, :)
@@ -29,7 +30,6 @@ contains
     close (Out)
    end subroutine OutputMatrix
 
-   ! Output matrix.
   subroutine OutputMaxMinElements(output_file, Max, Min)
     character(*), intent(in)  :: output_file
     integer                   :: Max, Min
