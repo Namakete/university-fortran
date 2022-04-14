@@ -30,5 +30,5 @@ Basic commands for compiling a project:
 - ```make clean``` - removes project build files
 
 
-[Copyright (c) 2022 Oberemok Ilya](https://github.com/Namakete/university-fortran/blob/main/Copyright.md)
+[Copyright (c) 2022 Oberemok Ilya](https://github.com/Namakete/university-fortran/blob/main/LICENCE.md)
 
