@@ -4,7 +4,7 @@ program main
   implicit none
   
   character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, j = 0, max_num = 0, temp = 0 
+  integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, max_num = 0, temp = 0 
   integer, allocatable       :: A(:,:), Indexes(:), TempA(:)
 
 
@@ -23,22 +23,23 @@ program main
   Indexes = [(i, i = 1, rows)]
 
   do i = 1, rows
-    max_num = maxloc(A(1,i:rows),dim=1)
-
-    TempA = A(:,i) 
-    A(:,i) = A(:, max_num+i-1)
-    A(:, max_num+i-1) = TempA
+    max_num = maxloc(A(1,i:rows),dim=1)+i-1
 
     temp = Indexes(i)
-    Indexes(i) = Indexes(max_num+i-1)
-    Indexes(max_num+i-1) = temp
+    Indexes(i) = Indexes(max_num)
+    Indexes(max_num) = temp
+    
+    A([i, :]) = A([:, i])
+    !TempA = A(:,i) 
+    !A(:,i) = A(:, max_num)
+    !A(:, max_num) = TempA
   end do
 
   open (file=output_file, encoding=E_, newunit=Out, position='append')
     write(Out, *) 'index of maximum element in bounds from and to rows'
     write (Out, '('//columns//'i4)') (Indexes(i), i = 1, rows )
     write(Out, *) 'Sorted array'
-    write (Out, '('//rows//'i4)') ((A(i, j), j = 1, rows ), i = 1, columns)
+      write (Out, '('//rows//'i4)') (A(i, :), i = 1, columns)
   close (Out)
 
 end program main

@@ -23,7 +23,7 @@ program main
 
     S(:,1:N-1) = A(:,1:N-1)+A(:,2:N)
     S(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
-    
+
     k = 0
     do
       m = maxval (S)

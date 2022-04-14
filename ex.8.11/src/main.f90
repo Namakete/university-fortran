@@ -10,14 +10,12 @@ program main
     integer, allocatable, target    :: A(:,:), C(:,:)
     integer, contiguous, pointer    :: MPA(:), MPC(:)
     
-    !Matrix - A(5,5)
     A = ReadMatrix(input_file_A)
     call OutputMatrix(output_file, A)
     MPA(1:Size(A)) => A
     call fina_max_min_elements(MPA, Max, Min)
     call OutputMaxMinElements(output_file, Max, Min)
 
-    !Matrix - C(4,4)
     C = ReadMatrix(input_file_C)
     call OutputMatrix(output_file, C)
     MPC(1:Size(C)) => C

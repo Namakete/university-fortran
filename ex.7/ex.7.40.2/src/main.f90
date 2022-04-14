@@ -1,6 +1,3 @@
-! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
-! See the LICENCE file in the repository root for full licence text.
-
 program main
     use environment
 
