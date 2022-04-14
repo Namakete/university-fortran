@@ -1,7 +1,7 @@
  Output array
-   3   3   3
-   3   3   3
-   3   3   3
+   4   4   4
+   4   4   4
+   4   4   4
  Coordinates of the maximum element of the matrix
    1   1
 
