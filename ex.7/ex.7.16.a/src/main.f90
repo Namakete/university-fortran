@@ -1,6 +1,10 @@
+! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
+! See the LICENCE file in the repository root for full licence text.
 program main
     use Environment
+
     implicit none
+
     character(*), parameter     :: input_file = "../data/input.txt" , output_file = "output.txt"
     integer                     :: In = 0, Out = 0, rows = 0, columns = 0, i = 0
     real(R_)                    :: Z = 0
@@ -23,9 +27,7 @@ program main
         write (Out, * ) 'Min element value by columns'
         write (Out,"(f6.1)") Z
     close (out)
-
 contains
-
     pure subroutine MinMaxElement(A,Z)
         real(R_) A(:,:)
         real(R_) Z
@@ -34,7 +36,6 @@ contains
 
         Z = Minval(Maxval(A, dim = 1))
     end subroutine MinMaxElement
-
 end program main
 
 

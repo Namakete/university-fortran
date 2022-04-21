@@ -1,41 +1,41 @@
 ! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
 ! See the LICENCE file in the repository root for full licence text.
 program main
-  use environment
-  implicit none
+    use environment
 
-  character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
-  integer                 :: Size = 0, Out = 0, In = 0, i = 0 
-  integer, allocatable    :: X(:), Indexes(:), NegativeIndexes(:), NegativeArray(:)
-  logical, allocatable    :: mask(:)
+    implicit none
 
-  open (file=input_file, newunit=In)
-      read(In, *) Size
-      allocate(X(Size))
-      read(In, *) X(:)
-  close (In)
+    character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
+    integer                 :: Size = 0, Out = 0, In = 0, i = 0
+    integer, allocatable    :: X(:), Indexes(:), NegativeIndexes(:), NegativeArray(:)
+    logical, allocatable    :: mask(:)
 
-  Indexes = [(i, i = 1, Size)]
-  
-  open (file=output_file, encoding=E_, newunit=Out)
-    write(Out,*) 'Indexes'
-    write (Out, '('//Size//'i4)') Indexes
-    write(Out,*) 'Array'
-    write (Out, '('//Size//'i4)') X
-  close (Out)
+    open (file=input_file, newunit=In)
+        read(In, *) Size
+        allocate(X(Size))
+        read(In, *) X(:)
+    close (In)
 
-  mask = X < 0
+    Indexes = [(i, i = 1, Size)]
 
-  NegativeIndexes = pack(Indexes, mask)
-  NegativeArray =  pack(X, mask)
+    open (file=output_file, encoding=E_, newunit=Out)
+        write(Out,*) 'Indexes'
+        write (Out, '('//Size//'i4)') Indexes
+        write(Out,*) 'Array'
+        write (Out, '('//Size//'i4)') X
+    close (Out)
 
-  open (file=output_file, encoding=E_, newunit=Out, position='append')
-      write(Out, *) 'Negative indexes'
-      write(Out, '('//Size//'i4)') NegativeIndexes
-      write(Out, *) 'Negative array'
-      write(Out, '('//Size//'i4)') NegativeArray
-  close (Out)
+    mask = X < 0
 
+    NegativeIndexes = pack(Indexes, mask)
+    NegativeArray =  pack(X, mask)
+
+    open (file=output_file, encoding=E_, newunit=Out, position='append')
+        write(Out, *) 'Negative indexes'
+        write(Out, '('//Size//'i4)') NegativeIndexes
+        write(Out, *) 'Negative array'
+        write(Out, '('//Size//'i4)') NegativeArray
+    close (Out)
 end program main
 
 

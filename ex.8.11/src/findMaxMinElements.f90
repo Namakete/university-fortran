@@ -14,13 +14,11 @@ contains
         Min = huge(Array)
 
         do i = 1, Size(Array, dim = 1)
-            if (Array(i) > Max) Max = Array(i) 
+            if (Array(i) > Max) Max = Array(i)
         end do
-        
+
         do i = 1, Size(Array, dim = 1)
             if (Array(i) < Min) Min = Array(i)
         end do
-
-    end subroutine fina_max_min_elements 
-
+    end subroutine fina_max_min_elements
 end module FindMaxMinElements

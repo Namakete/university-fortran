@@ -34,5 +34,4 @@ program main
         write(Out, *) 'Elements'
         write (Out, '('//N//'i4)') Elements
     close (Out)
-
 end program main
