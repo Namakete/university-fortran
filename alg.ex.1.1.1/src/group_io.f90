@@ -40,5 +40,32 @@ module Group_IO
         close (Out)
     end subroutine Create_data_file
 
+    function Read_class_list(Data_File) result(Group)
+        type(student)                 Group(STUD_AMOUNT)
+        character(*), intent(in)   :: Data_File
+
+        integer In, IO, recl
+
+        recl = ((SURNAME_LEN + INITIALS_LEN + 1)*CH_ + MARKS_AMOUNT*I_ + R_) * STUD_AMOUNT
+        open (file=Data_File, form='unformatted', newunit=In, access='direct', recl=recl)
+        read (In, iostat=IO, rec=1) Group
+        call Handle_IO_status(IO, "reading unformatted class list")
+        close (In)
+    end function Read_class_list
+   
+    subroutine Output_class_list(Output_File, Group, List_name, Position)
+      character(*), intent(in)   :: Output_File, Position, List_name
+      type(student), intent(in)  :: Group(:)
+
+      integer                    :: Out, IO
+      character(:), allocatable  :: format
+      
+      open (file=Output_File, encoding=E_, position=Position, newunit=Out)
+         write (out, '(/a)') List_name
+         format = '(3(a, 1x), ' // MARKS_AMOUNT // 'i1, f5.2)'
+         write (Out, format, iostat=IO) Group
+         call Handle_IO_status(IO, "writing " // List_name)
+      close (Out)
+   end subroutine Output_class_list
 
 end module Group_IO
