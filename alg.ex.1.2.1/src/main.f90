@@ -135,14 +135,14 @@ contains
         Gender_Aver_Marks = Real(Sum(Gender_Marks, dim=2), R_) / MARKS_AMOUNT
     end subroutine Get_list_by_gender
 
-    pure function Get_Max_Value(Gender_Aver_Marks) result(t_ind)
+    pure function Get_Max_Value(Gender_Aver_Marks) result(Element_Indexes)
         real(R_), intent(in)        :: Gender_Aver_Marks(:)
-        integer, allocatable        :: t_ind(:)
-        real(R_)                    :: maxA  
+        integer, allocatable        :: Element_Indexes(:)
+        real(R_)                    :: Max_Element  
 
-        maxA = MaxVal(Real(Gender_Aver_Marks, R_))
+        Max_Element = MaxVal(Real(Gender_Aver_Marks, R_))
      
-        t_ind = Pack( [(i, i = 1, size(Gender_Aver_Marks))], [Gender_Aver_Marks == maxA])      
+        Element_Indexes = Pack([(i, i = 1, size(Gender_Aver_Marks))], [Gender_Aver_Marks == Max_Element])      
     end function Get_Max_Value
    
     pure subroutine Get_Average_Mark(gender_aver_marks, aver_mark)

@@ -98,7 +98,7 @@ program reference_lab_1_1
     close (Out)
    
     open (file=output_file, encoding=E_, position ='append', newunit=Out)
-        write (out, '(/a, f5.2)') "Средний балл среди мужчин: ", All_Marks_Male
-        write (out, '(a, f5.2)') "Средний балл среди женщин: ", All_Marks_Female
+        write (out, '(/a, f5.2)') "Средний балл среди юношей: ", All_Marks_Male
+        write (out, '(a, f5.2)') "Средний балл среди девочек: ", All_Marks_Female
     close (Out)
 end program reference_lab_1_1
