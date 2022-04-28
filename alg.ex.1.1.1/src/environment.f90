@@ -3,11 +3,11 @@ module environment
 
   implicit none
 
-  integer, parameter      :: I_ = INT32                             ! Разновидность типа для целочисленных переменных.
-  integer, parameter      :: R_ = REAL32                            ! Разновидность типа для вещественных переменных.
-  integer, parameter      :: C_ = R_                                ! Разновидность типа для компексных переменных.
-  integer, parameter      :: CH_= Selected_Char_Kind("ISO_10646")   ! Разновидность типа для символов.
-  character(*), parameter :: E_ = "UTF-8"                           ! Кодировка файлов.
+  integer, parameter      :: I_ = INT32                             
+  integer, parameter      :: R_ = REAL32                            
+  integer, parameter      :: C_ = R_                                
+  integer, parameter      :: CH_= Selected_Char_Kind("ISO_10646")   
+  character(*), parameter :: E_ = "UTF-8"                          
 
   interface operator (//)
     module procedure Int_plus_string
@@ -45,7 +45,6 @@ contains
     case default
       write (ERROR_UNIT, '(a, i0)') "Undetermined behaviour has been reached while " // where // ": ", IO
     end select
-    ! close (Out) ! Если не OUTPUT_UNIT.
   end subroutine Handle_IO_status
 
 end module environment

@@ -9,8 +9,10 @@ clean:
 debug:
 	mkdir -p bin obj
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
+	$(FC) $(FFLAGS) -c src/group_io.f90 -J obj/ -o obj/group_io.o
+	$(FC) $(FFLAGS) $(FOPT) -c src/group_process.f90 -J obj/ -o obj/group_process.o
 	$(FC) $(FFLAGS) $(FOPT) -c src/main.f90 -I obj/ -o obj/main.o
-	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/environment.o obj/main.o
+	$(FC) $(FFLAGS) $(FOPT) -o bin/app ./obj/environment.o ./obj/group_io.o ./obj/group_process.o ./obj/main.o
 
 run:
 	cd ./bin; rm output.txt 2>/dev/null; ./app; cat output.txt 2>/dev/null
