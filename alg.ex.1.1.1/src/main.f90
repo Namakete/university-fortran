@@ -3,6 +3,7 @@
 program main
     use environment
     use Group_IO
+    use Group_Process
 
     implicit none
 
@@ -20,4 +21,8 @@ program main
     Group = Read_class_list(data_file)
 
     call Output_class_list(output_file, Group, "Исходный список:", "rewind")
+    
+
+
+
 end program main
