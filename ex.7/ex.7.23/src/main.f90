@@ -8,7 +8,7 @@ program main
     character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
     integer                         :: In = 0, Out = 1, N = 0, i, max_pos, N_max_pos
     integer, allocatable            :: A(:,:), S(:,:)
-    integer, allocatable            :: Indexes(:, :), Ind_max_pos(:, :)
+    integer, allocatable            :: INDEXES(:, :), Ind_max_pos(:, :)
     logical, allocatable            :: Mask(:)
 
     open (file=input_file, newunit=In)
@@ -23,13 +23,13 @@ program main
     close(Out)
 
     allocate (S (N, N-1))
-    allocate (Indexes((N-1)**2, 2))
+    allocate (INDEXES((N-1)**2, 2))
     allocate (Mask((N-1)**2), source=.false.)
 
     S(:,1:N-1) = A(:,1:N-1)+A(:,2:N)
     S(1:N-1,:) = S(1:N-1,:)+S(2:N,:)
 
-    call MaxPos(S(1:N-1,1:N-1), max_pos, Mask, Indexes, Ind_max_pos, N_max_pos)
+    call MaxPos(S(1:N-1,1:N-1), max_pos, Mask, INDEXES, Ind_max_pos, N_max_pos)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
         write(Out, *) 'Output array'
