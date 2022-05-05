@@ -123,16 +123,16 @@ contains
         Gender_Amount  = Count(Is_A_Gender)
 
         Gender_Pos  = Pack(INDEXES, Is_A_Gender)
-        allocate (Gender_Surnames(Gender_Amount, SURNAME_LEN), &
-        Gender_Initials(Gender_Amount, INITIALS_LEN), Gender_Marks(Gender_Amount, MARKS_AMOUNT))
+        allocate (Gender_Surnames(SURNAME_LEN, Gender_Amount), &
+        Gender_Initials(INITIALS_LEN, Gender_Amount), Gender_Marks(MARKS_AMOUNT, Gender_Amount))
       
         do concurrent (i = 1:Gender_Amount)
-            Gender_Surnames(i, :)  = Surnames(Gender_Pos(i), :)
-            Gender_Initials(i, :)  = Initials(Gender_Pos(i), :)
-            Gender_Marks(i, :)  = Marks(Gender_Pos(i), :)
+            Gender_Surnames(:, i)  = Surnames(:, Gender_Pos(i))
+            Gender_Initials(:, i)  = Initials(:, Gender_Pos(i))
+            Gender_Marks(:, i)  = Marks(:, Gender_Pos(i))
         end do
 
-        Gender_Aver_Marks = Real(Sum(Gender_Marks, dim=2), R_) / MARKS_AMOUNT
+        Gender_Aver_Marks = Real(Sum(Gender_Marks, dim=1), R_) / MARKS_AMOUNT
     end subroutine Get_list_by_gender
 
     pure function Get_Max_Value(Gender_Aver_Marks) result(Max_Gender_Position)
@@ -157,7 +157,7 @@ contains
         integer                     :: Out
         
         open(file=output_file, encoding=E_, position=position, newunit=Out)
-            write (Out, '(a, f5.2)') Title, Average_Mark
+            write (Out, '(/a, f5.2)') Title, Average_Mark
         close (Out)
     end subroutine Output_Average_Mark
 end program reference_lab_1_1
