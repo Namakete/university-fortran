@@ -78,25 +78,25 @@ contains
         close (In)
     end subroutine Read_class_list
 
-    subroutine Output_class_list(Output_File, Surnames, Initials, Genders, Marks, Aver_Marks, List_name, Position, Elem)
-      character(*)         Output_File, Position, List_name
-      character(kind=CH_)  Surnames(:, :), Initials(:, :), Genders(:)
-      integer              Marks(:, :)
-      real(R_)             Aver_Marks(:)
-      integer              Elem(:)
-      intent (in)    Output_File, Surnames, Initials, Genders, Marks, Aver_Marks, List_name, Position, Elem
+    subroutine Output_class_list(Output_File, Surnames, Initials, Genders, Marks, Aver_Marks, Title, Position, INDEXES)
+      character(*)          Output_File, Position, Title
+      character(kind=CH_)   Surnames(:, :), Initials(:, :), Genders(:)
+      integer               Marks(:, :)
+      real(R_)              Aver_Marks(:)
+      integer               INDEXES(:)
+      intent (in)           Output_File, Surnames, Initials, Genders, Marks, Aver_Marks, Title, Position, INDEXES
 
       integer                       :: Out, i, IO
       character(:), allocatable     :: format
    
       open (file=output_file, encoding=E_, position=position, newunit=Out)
-         write (out, '(/a)') List_name
+         write (out, '(/a)') Title
          format = '(' // SURNAME_LEN // 'a1, 1x, ' // INITIALS_LEN // 'a1, 1x, a, 1x, ' // &
             MARKS_AMOUNT // 'i1, f5.2)'
          write (Out, format, iostat=IO) &
-            (Surnames(:, Elem(i)), Initials(:, Elem(i)), Genders(Elem(i)), Marks(:, Elem(i)), &
-            Aver_Marks(Elem(i)), i = 1, Size(Elem))
-         call Handle_IO_status(IO, "writing " // List_name)
+            (Surnames(:, INDEXES(i)), Initials(:, INDEXES(i)), Genders(INDEXES(i)), Marks(:, INDEXES(i)), &
+            Aver_Marks(INDEXES(i)), i = 1, Size(INDEXES))
+         call Handle_IO_status(IO, "writing " // Title)
       close (Out)
     end subroutine Output_class_list
 
@@ -135,13 +135,13 @@ contains
         Gender_Aver_Marks = Real(Sum(Gender_Marks, dim=2), R_) / MARKS_AMOUNT
     end subroutine Get_list_by_gender
 
-    pure function Get_Max_Value(Gender_Aver_Marks) result(Max_Gender_Number)
+    pure function Get_Max_Value(Gender_Aver_Marks) result(Max_Gender_Position)
         real(R_), intent(in)        :: Gender_Aver_Marks(:)
-        integer, allocatable        :: Max_Gender_Number(:)
-        real(R_)                    :: Max_Element  
+        integer, allocatable        :: Max_Gender_Position(:)
+        real(R_)                    :: Max_Value  
 
-        Max_Element = MaxVal(Real(Gender_Aver_Marks, R_))
-        Max_Gender_Number = Pack([(i, i = 1, size(Gender_Aver_Marks))], [Gender_Aver_Marks == Max_Element])      
+        Max_Value = MaxVal(Real(Gender_Aver_Marks, R_))
+        Max_Gender_Position = Pack([(i, i = 1, size(Gender_Aver_Marks))], [Gender_Aver_Marks == Max_Value])      
     end function Get_Max_Value
    
     pure subroutine Get_Average_Mark(Gender_Average_Marks, Average_Mark)
@@ -151,14 +151,13 @@ contains
         Average_Mark = Sum(Real(Gender_Average_Marks,R_))/Size(Gender_Average_Marks)
     end subroutine Get_Average_Mark
 
-    subroutine Output_Average_Mark(Output_File, Average_Mark, List_name, Position)
-        character(*), intent(in)    :: Output_File, Position, List_name
+    subroutine Output_Average_Mark(Output_File, Average_Mark, Title, Position)
+        character(*), intent(in)    :: Output_File, Position, Title
         real(R_), intent(in)        :: Average_Mark
         integer                     :: Out
         
         open(file=output_file, encoding=E_, position=position, newunit=Out)
-            write (out, '(/a)') List_name
-            write (Out, '(f5.2)') Average_Mark
+            write (Out, '(a, f5.2)') Title, Average_Mark
         close (Out)
     end subroutine Output_Average_Mark
 end program reference_lab_1_1
