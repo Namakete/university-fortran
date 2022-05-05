@@ -20,7 +20,7 @@ program main
     integer, allocatable            :: b_ind(:), g_ind(:)
     real(R_)                        :: Boys_Aver_Mark, Girls_Aver_Mark
     
-    integer, parameter              :: INDEXIS(*) = [(i, i = 1, STUD_AMOUNT)]
+    integer, parameter              :: INDEXES(*) = [(i, i = 1, STUD_AMOUNT)]
 
     input_file  = "../data/class.txt"
     output_file = "output.txt"
@@ -29,7 +29,7 @@ program main
     call Create_data_file(input_file, data_file)
    
     Group = Read_class_list(data_file)
-    call Output_class_list(output_file, Group, "Исходный список:", "rewind", INDEXIS)
+    call Output_class_list(output_file, Group, "Исходный список:", "rewind", INDEXES)
 
     Boys  = Pack(Group, Group%Sex == MALE)
     Girls = Pack(Group, Group%Sex == FEMALE)
