@@ -1,6 +1,6 @@
 ! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
 ! See the LICENCE file in the repository root for full licence text.
-program reference_lab_1_1
+program main
    use Environment
 
     implicit none
@@ -22,17 +22,17 @@ program reference_lab_1_1
    
     integer                                         :: Marks(STUD_AMOUNT, MARKS_AMOUNT) = 0
     integer, allocatable                            :: Boys_Marks(:, :), Girls_Marks(:, :), Boys_Pos(:), Girls_Pos(:)
-   
+    
     real(R_)                                        :: Aver_Marks(STUD_AMOUNT) = 0
-    real(R_), allocatable                           :: Boys_Aver_Marks(:), Girls_Aver_Marks(:)
+    real(R_), allocatable                           :: Boys_Average_Marks(:), Girls_Average_Marks(:)
 
     logical, allocatable                            :: Is_A_Boy(:), Is_A_Girl(:)
     integer                                         :: Boys_Amount = 0, Girls_Amount = 0
 
-    real(R_)                                        :: max_Female, max_Male 
-    real(R_)                                        :: All_Marks_Male, All_Marks_Female
-    logical, allocatable                            :: mask_Female(:), mask_Male(:)
-    integer, allocatable                            :: A_M(:), A_F(:)
+    real(R_)                                        :: Max_Girls, Max_Boys 
+    real(R_)                                        :: All_Marks_Boys, All_Marks_Girls
+    logical, allocatable                            :: Mask_Girls(:), Mask_Boys(:)
+    integer, allocatable                            :: A_B(:), A_G(:)
     
     integer, parameter                              :: INDEXES(*) = [(i, i = 1, STUD_AMOUNT)]
 
@@ -73,32 +73,32 @@ program reference_lab_1_1
         Girls_Marks(i, :)  = Marks(Girls_Pos(i), :)
     end do
       
-    Boys_Aver_Marks = Real(Sum(Boys_Marks, dim=2), R_) / MARKS_AMOUNT
-    Girls_Aver_Marks = Real(Sum(Girls_Marks, dim=2), R_) / MARKS_AMOUNT
+    Boys_Average_Marks = Real(Sum(Boys_Marks, dim=2), R_)/MARKS_AMOUNT
+    Girls_Average_Marks = Real(Sum(Girls_Marks, dim=2), R_)/MARKS_AMOUNT
     
-    max_Male = MAxVal(Boys_Aver_Marks)
-    max_Female = MaxVal(Girls_Aver_Marks)
+    Max_Boys = MaxVal(Boys_Average_Marks)
+    Max_Girls = MaxVal(Girls_Average_Marks)
 
-    mask_Male = [Boys_Aver_Marks == max_Male]
-    mask_Female = [Girls_Aver_Marks == max_Female]
+    Mask_Boys = [Boys_Average_Marks == Max_Boys]
+    Mask_Girls = [Girls_Average_Marks == Max_Girls]
 
-    A_M = Pack([(i, i=1, Boys_Amount)], mask_Male)
-    A_F = Pack([(i, i=1, Girls_Amount)], mask_Female)
+    A_B = Pack([(i, i=1, Boys_Amount)], Mask_Boys)
+    A_G = Pack([(i, i=1, Girls_Amount)], Mask_Girls)
 
-    All_Marks_Male = Sum(Boys_Aver_Marks)/Boys_Amount
-    All_Marks_Female = Sum(Girls_Aver_Marks)/Girls_Amount
+    All_Marks_Boys = Sum(Boys_Average_Marks)/Boys_Amount
+    All_Marks_Girls = Sum(Girls_Average_Marks)/Girls_Amount
  
     open (file=output_file, encoding=E_, position='append', newunit=Out)
         write (out, '(/a)') "Лучшая успеваемость среди юношей:"
         write (Out, format, iostat=IO) &
-        (Boys_Surnames(A_M(i)), Boys_Initials(A_M(i)), "М", Boys_Marks(A_M(i), :), Boys_Aver_Marks(A_M(i)), i = 1,size(A_M))
+        (Boys_Surnames(A_B(i)), Boys_Initials(A_B(i)), "М", Boys_Marks(A_B(i), :), Boys_Average_Marks(A_B(i)), i = 1,size(A_B))
         write (out, '(/a)') "Лучшая успеваемость среди девочек:"
         write (Out, format, iostat=IO) &
-        (Girls_Surnames(A_F(i)), Girls_Initials(A_F(i)), "Ж", Girls_Marks(A_F(i), :), Girls_Aver_Marks(A_F(i)), i = 1,size(A_F))
+        (Girls_Surnames(A_G(i)), Girls_Initials(A_G(i)), "Ж", Girls_Marks(A_G(i), :), Girls_Average_Marks(A_G(i)), i = 1,size(A_G))
     close (Out)
    
     open (file=output_file, encoding=E_, position ='append', newunit=Out)
-        write (out, '(/a, f5.2)') "Средний балл среди юношей: ", All_Marks_Male
-        write (out, '(a, f5.2)') "Средний балл среди девочек: ", All_Marks_Female
+        write (out, '(/a, f5.2)') "Средний балл среди юношей: ", All_Marks_Boys
+        write (out, '(a, f5.2)') "Средний балл среди девочек: ", All_Marks_Girls
     close (Out)
-end program reference_lab_1_1
+end program main
