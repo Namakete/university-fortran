@@ -19,7 +19,7 @@ contains
     subroutine Create_data_file(Input_File, Data_File)
         character(*), intent(in)   :: Input_File, data_file
       
-        type(student)              :: stud
+        type(student)              :: Students
         integer                    :: In, Out, IO, i, recl
         character(:), allocatable  :: format
       
@@ -28,9 +28,9 @@ contains
             open (file=Data_File, form='unformatted', newunit=Out, access='direct', recl=recl)
                 format = '(3(a, 1x), ' // MARKS_AMOUNT // 'i1, f5.2)'
                 do i = 1, STUD_AMOUNT
-                    read (In, format, iostat=IO) stud
+                    read (In, format, iostat=IO) Students
                     call Handle_IO_status(IO, "reading formatted class list, line " // i)
-                    write (Out, iostat=IO, rec=i) stud
+                    write (Out, iostat=IO, rec=i) Students
                     call Handle_IO_status(IO, "creating unformatted file with class list, record " // i)
                 end do
             close (In)
@@ -50,29 +50,28 @@ contains
         close (In)
     end function Read_class_list
  
-    subroutine Output_class_list(Output_File, Group, List_name, Position, Max_INDEX)
-        character(*), intent(in)   :: Output_File, Position, List_name
+    subroutine Output_class_list(Output_File, Group, Title, Position, Max_INDEX)
+        character(*), intent(in)   :: Output_File, Position, Title
         type(student), intent(in)  :: Group(:)
         integer, intent(in)        :: Max_INDEX(:)
         integer                    :: Out, IO, i
         character(:), allocatable  :: format      
       
         open (file=Output_File, encoding=E_, position=Position, newunit=Out)
-            write (out, '(/a)') List_name 
+            write (out, '(/a)') Title 
             format = '(3(a, 1x), ' // MARKS_AMOUNT // 'i1, f5.2)'
-            write (Out, format,iostat= IO ) (Group(Max_INDEX(i)), i = 1, size(Max_INDEX)) 
-            call Handle_IO_status(IO, "writing " // List_name)
+            write (Out, format, iostat= IO ) (Group(Max_INDEX(i)), i = 1, size(Max_INDEX)) 
+            call Handle_IO_status(IO, "writing " // Title)
         close (Out)
     end subroutine Output_class_list
 
-   subroutine Output_aver_list(Output_File, Aver_Mark, List_name, Position)
-        character(*), intent(in)   :: Output_File, Position, List_name
+   subroutine Output_aver_list(Output_File, Aver_Mark, Ttile, Position)
+        character(*), intent(in)   :: Output_File, Position, Ttile
         real(R_), intent(in)       :: Aver_Mark
         integer                    :: Out
       
         open (file=Output_File, encoding=E_, position=position, newunit=Out)
-            write (out, '(/a)') List_name
-            write (Out, '(f5.2)') Aver_Mark       
+            write (Out, '(/a, f5.2)')Ttile, Aver_Mark       
         close (Out)
    end subroutine Output_aver_list
 end module Group_IO 
