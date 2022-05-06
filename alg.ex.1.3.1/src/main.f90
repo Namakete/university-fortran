@@ -17,7 +17,7 @@ program main
     type(student)                   :: Group(STUD_AMOUNT)
     type(student), allocatable      :: Boys(:), Girls(:)
     
-    integer, allocatable            :: b_ind(:), g_ind(:)
+    integer, allocatable            :: Boys_Amount(:), Girls_Amount(:)
     real(R_)                        :: Boys_Aver_Mark, Girls_Aver_Mark
     
     integer, parameter              :: INDEXES(*) = [(i, i = 1, STUD_AMOUNT)]
@@ -42,15 +42,19 @@ program main
         Girls(i)%Aver_mark = Real(Sum(Girls(i)%Marks), R_) / MARKS_AMOUNT
     end do
 
-    b_ind = Sort_class_list(Boys)
-    g_ind = Sort_class_list(Girls)
+    Boys_Amount = Sort_class_list(Boys)
+    Girls_Amount = Sort_class_list(Girls)
 
-    call Output_class_list(output_file, Boys, "Лучшая успеваемость среди юношей:", "append", b_ind)
-    call Output_class_list(output_file, Girls, "Лучшая успеваемость среди девочек:", "append", g_ind)
+    call Output_class_list(output_file, Boys, "Лучшая успеваемость среди юношей:", &
+        "append", Boys_Amount)
+    call Output_class_list(output_file, Girls, "Лучшая успеваемость среди девочек:", &
+        "append", Girls_Amount)
 
     call sub_aver_mark(Boys, Boys_Aver_Mark)
     call sub_aver_mark(Girls, Girls_Aver_Mark)
 
-    call Output_aver_list(Output_file, Boys_Aver_Mark, "Средний балл среди юношей: ", "append")
-    call Output_aver_list(Output_file, Girls_Aver_Mark, "Средний балл среди девочек: ", "append")
+    call Output_aver_list(Output_file, Boys_Aver_Mark, &
+        "Средний балл среди юношей: ", "append")
+    call Output_aver_list(Output_file, Girls_Aver_Mark, &
+        "Средний балл среди девочек: ", "append")
 end program main

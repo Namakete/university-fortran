@@ -16,7 +16,7 @@ module Group_IO
     end type student
    
 contains
-    subroutine Create_data_file(Input_File, Data_File)
+    subroutine Create_Data_File(Input_File, Data_File)
         character(*), intent(in)   :: Input_File, data_file
       
         type(student)              :: Students
@@ -35,9 +35,9 @@ contains
                 end do
             close (In)
         close (Out)
-    end subroutine Create_data_file
+    end subroutine Create_Data_File
 
-    function Read_class_list(File_Data) result(Group)
+    function Read_Class_List(File_Data) result(Group)
         type(student)                 Group(STUD_AMOUNT)
         character(*), intent(in)   :: File_Data
 
@@ -48,9 +48,9 @@ contains
             read (In, iostat=IO, rec=1) Group
             call Handle_IO_status(IO, "reading unformatted class list")
         close (In)
-    end function Read_class_list
+    end function Read_Class_List
  
-    subroutine Output_class_list(Output_File, Group, Title, Position, Max_INDEX)
+    subroutine Output_Class_List(Output_File, Group, Title, Position, Max_INDEX)
         character(*), intent(in)   :: Output_File, Position, Title
         type(student), intent(in)  :: Group(:)
         integer, intent(in)        :: Max_INDEX(:)
@@ -63,9 +63,9 @@ contains
             write (Out, format, iostat= IO ) (Group(Max_INDEX(i)), i = 1, size(Max_INDEX)) 
             call Handle_IO_status(IO, "writing " // Title)
         close (Out)
-    end subroutine Output_class_list
+    end subroutine Output_Class_List
 
-   subroutine Output_aver_list(Output_File, Aver_Mark, Ttile, Position)
+   subroutine Output_Average_List(Output_File, Aver_Mark, Ttile, Position)
         character(*), intent(in)   :: Output_File, Position, Ttile
         real(R_), intent(in)       :: Aver_Mark
         integer                    :: Out
@@ -73,5 +73,5 @@ contains
         open (file=Output_File, encoding=E_, position=position, newunit=Out)
             write (Out, '(/a, f5.2)')Ttile, Aver_Mark       
         close (Out)
-   end subroutine Output_aver_list
+   end subroutine Output_Average_List
 end module Group_IO 
