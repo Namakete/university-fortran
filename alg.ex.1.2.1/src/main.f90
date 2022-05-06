@@ -1,6 +1,6 @@
 ! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
 ! See the LICENCE file in the repository root for full licence text.
-program reference_lab_1_1
+program main
     use Environment
 
     implicit none
@@ -160,4 +160,4 @@ contains
             write (Out, '(/a, f5.2)') Title, Average_Mark
         close (Out)
     end subroutine Output_Average_Mark
-end program reference_lab_1_1
+end program main
