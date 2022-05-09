@@ -29,7 +29,7 @@ program main
     call Output_class_list(output_file, Group, "Исходный список:", "rewind")
 
     do concurrent (i = 1:Size(Group))
-        Group(i)%Aver_mark = Real(Sum(Group(i)%Marks), R_) / MARKS_AMOUNT
+        Group(i)%Average_Mark = Real(Sum(Group(i)%Marks), R_) / MARKS_AMOUNT
     end do
 
     call Max_and_sum (Group, 1, Boys_Max_Value, Girls_Max_Value, Boys_Amount, Girls_Amount, Number_of_Boys, Number_of_Girls)
@@ -37,8 +37,8 @@ program main
     Boys_Average_Marks = Boys_Amount / Number_of_Boys
     Girls_Average_Marks = Girls_Amount / Number_of_Girls
 
-    Boys_Best_Average = Pack(Group, Group%Sex==MALE .and. Group%Aver_mark>=(Boys_Max_Value))
-    Girls_Best_Average = Pack(Group, Group%Sex==FEMALE .and. Group%Aver_mark>=(Girls_Max_Value))
+    Boys_Best_Average = Pack(Group, Group%Sex==MALE .and. Group%Average_Mark>=(Boys_Max_Value))
+    Girls_Best_Average = Pack(Group, Group%Sex==FEMALE .and. Group%Average_Mark>=(Girls_Max_Value))
 
     call Output_class_list(output_file, Boys_Best_Average, &
         "Лучшая успеваемость среди юношей:", "append")
