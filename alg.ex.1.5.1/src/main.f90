@@ -13,10 +13,10 @@ program main
     character(kind=CH_), parameter  :: FEMALE = Char(1046, CH_)
    
     type(student), pointer          :: Group_List => Null(), &
-                                       Boys_list => Null(), &
-                                       Girls_list => Null(), &
-                                       Boys_a_list => Null(), &
-                                       Girls_a_list => Null()
+                                       Boys_List => Null(), &
+                                       Girls_List => Null(), &
+                                       Boys_A_List => Null(), &
+                                       Girls_A_List => Null()
    
     integer(I_)                     :: Boys_Amount = 0, Girls_Amount = 0
     real(R_)                        :: Boys_Average_Mark, Girls_Average_Mark
@@ -29,24 +29,24 @@ program main
     if (Associated(Group_List)) then
         call Output_class_list(output_file, Group_List, "Исходный список:", "rewind")
 
-        call Get_list_by_gender(Group_List, Boys_list, Boys_Amount, MALE)
-        call Get_list_by_gender(Group_List, Girls_list, Girls_Amount, FEMALE)
+        call Get_list_by_gender(Group_List, Boys_List, Boys_Amount, MALE)
+        call Get_list_by_gender(Group_List, Girls_List, Girls_Amount, FEMALE)
       
-        call Sort_class_list(Boys_list, Boys_Amount, Boys_Average_Mark)
-        call Sort_class_list(Girls_list, Girls_Amount, Girls_Average_Mark)
+        call Sort_class_list(Boys_List, Boys_Amount, Boys_Average_Mark)
+        call Sort_class_list(Girls_List, Girls_Amount, Girls_Average_Mark)
+   
+        call Get_list_by_Average(Boys_List, Boys_A_List,  Boys_Average_Mark)
+        call Get_list_by_Average(Girls_List, Girls_A_List, Girls_Average_Mark)
 
-        call Get_list_by_Average(Boys_list, Boys_a_list,  Boys_Average_Mark)
-        call Get_list_by_Average(Girls_list, Girls_a_list, Girls_Average_Mark)
-
-        if (Associated(Boys_list)) &
-            call Output_class_list(output_file, Boys_a_list, &
+        if (Associated(Boys_List)) &
+            call Output_class_list(output_file, Boys_A_List, &
             "Лучшая успеваемость среди юношей:", "append")
-        if (Associated(Girls_list)) &
-            call Output_class_list(output_file, Girls_a_list, &
+        if (Associated(Girls_List)) &
+            call Output_class_list(output_file, Girls_A_List, &
             "Лучшая успеваемость среди девочек:", "append")
   
-        call Sub_average_mark(Boys_list, Boys_Amount, Boys_Average_Mark)  
-        call Sub_average_mark(Girls_list, Girls_Amount, Girls_Average_Mark)  
+        call Sub_average_mark(Boys_List, Boys_Amount, Boys_Average_Mark)  
+        call Sub_average_mark(Girls_List, Girls_Amount, Girls_Average_Mark)  
 
         call Output_Aver_Mark(Output_file, Boys_Average_Mark, &
             "Cредний балл среди юношей: ", "append")
