@@ -28,7 +28,7 @@ contains
         end if
     end subroutine Get_list_by_gender
 
-    pure recursive subroutine Get_list_by_Average(Stud, List, Max_average_mark)
+    pure recursive subroutine Get_list_by_average(Stud, List, Max_average_mark)
         type(student), intent(in)        :: Stud
         type(student), pointer           :: List
         real(R_), intent(in)             :: Max_average_mark
@@ -39,11 +39,11 @@ contains
             List%next => Null()
             
             if (Associated(Stud%next)) &
-                call Get_list_by_Average(Stud%next, List%next, Max_average_mark)
+                call Get_list_by_average(Stud%next, List%next, Max_average_mark)
         else if (Associated(Stud%next)) then
-            call Get_list_by_Average(Stud%next, List, Max_average_mark)
+            call Get_list_by_average(Stud%next, List, Max_average_mark)
         end if
-    end subroutine Get_list_by_Average
+    end subroutine Get_list_by_average
 
     pure subroutine Sort_class_list(Group, Amount, Find_max_amount)
         type(student),pointer           :: Group
@@ -64,7 +64,7 @@ contains
             Find_max_value =  Real(Current%Aver_Mark,R_)
         end if
         if (j < N) &
-            call find_max(Current%next, N, j+1, Find_max_value)
+            call Find_max(Current%next, N, j+1, Find_max_value)
     end subroutine Find_max
 
     pure subroutine Sub_average_mark(Group, Amount, Average_Mark)
@@ -76,7 +76,7 @@ contains
         i = 1
         Sum_Amount = 0
         
-        call find_sum(Group, Amount, i, Sum_Amount)
+        call Find_sum(Group, Amount, i, Sum_Amount)
 
         Average_Mark = Sum_Amount/Amount
     end subroutine Sub_average_mark
