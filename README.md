@@ -28,7 +28,7 @@
 - [x] [Exercise 1.5](https://github.com/Namakete/university-fortran/blob/main/Algorithms%20and%20data%20structure/alg.ex.1.5.1/src/main.f90) - v.1
 - [x] [Exercise 2](https://github.com/Namakete/university-fortran/blob/main/Algorithms%20and%20data%20structure/alg.ex.2.1.c/src/main.f90) - v.1
 - [x] [Exercise 3](https://github.com/Namakete/university-fortran/blob/main/Algorithms%20and%20data%20structure/alg.ex.3.1/src/main.f90) - v.1
-- [ ] ~~Exercise~~ 4 - v.1
+- [ ] ~~Exercise 4~~ - v.1
 - [ ] ~~Exercise 5~~ - v.1
   
 </details>
@@ -40,8 +40,6 @@
 - [Content](https://github.com/Namakete/university-fortran/blob/main/Data%20structure%20report/source/2.tex)
   
 </details>
-
-
 
 ## Vim / NoeVim
 
