@@ -5,36 +5,39 @@ program main
 
     implicit none
 
-    character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                 :: Size = 0, Out = 0, In = 0, i = 0
-    integer, allocatable    :: X(:), Indexes(:), NegativeIndexes(:), NegativeArray(:)
+    character(:), allocatable   :: input_file, output_file
+    integer                 :: In = 0, Out = 0, Size = 0, i = 0
+    integer, allocatable    :: array(:), get_indexes(:), negative_indexes(:), negative_array(:)
     logical, allocatable    :: mask(:)
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
         read(In, *) Size
-        allocate(X(Size))
-        read(In, *) X(:)
+        allocate(array(Size))
+        read(In, *) array(:)
     close (In)
 
-    Indexes = [(i, i = 1, Size)]
+    get_indexes = [(i, i = 1, Size)]
 
     open (file=output_file, encoding=E_, newunit=Out)
-        write(Out,*) 'Indexes'
-        write (Out, '('//Size//'i4)') Indexes
-        write(Out,*) 'Array'
-        write (Out, '('//Size//'i4)') X
+        write(Out,*) "Output array indexes"
+        write (Out, '('//Size//'i4)') get_indexes
+        write(Out,*) "Outputting array elements"
+        write (Out, '('//Size//'i4)') array
     close (Out)
 
-    mask = X < 0
+    mask = (array < 0)
 
-    NegativeIndexes = pack(Indexes, mask)
-    NegativeArray =  pack(X, mask)
+    negative_indexes = Pack(get_indexes, mask)
+    negative_array =  Pack(array, mask)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, *) 'Negative indexes'
-        write(Out, '('//Size//'i4)') NegativeIndexes
-        write(Out, *) 'Negative array'
-        write(Out, '('//Size//'i4)') NegativeArray
+        write(Out, *) "Print of negative indexes"
+        write(Out, '('//Size//'i4)') negative_indexes
+        write(Out, *) "Print of negative array elements"
+        write(Out, '('//Size//'i4)') negative_array
     close (Out)
 end program main
 

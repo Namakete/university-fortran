@@ -5,35 +5,38 @@ program main
 
     implicit none
 
-    character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                    :: In = 0, Out = 1, rows = 0, columns = 0, i = 0, max_num = 0
-    integer, allocatable       :: A(:,:), Indexes(:)
+    character(:), allocatable   :: input_file, output_file
+    integer                     :: In = 0, Out = 1, row = 0, column = 0, i = 0, max_number = 0
+    integer, allocatable        :: array(:,:), get_indexes(:)
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
-        read(In, *) rows, columns
-        allocate(A(columns,rows))
-        allocate(Indexes(columns))
-        read(In, *) (A(i,:), i = 1, columns)
+        read(In, *) row, column
+        allocate(array(column,row))
+        allocate(get_indexes(column))
+        read(In, *) (array(i,:), i = 1, column)
     close (In)
 
     open (file=output_file, encoding=E_, newunit=Out)
         write(Out, *) 'Array'
-        write (Out, '('//rows//'i4)') (A(i, :), i = 1, columns)
+        write (Out, '('//row//'i4)') (array(i, :), i = 1, column)
     close (Out)
 
-    Indexes = [(i, i = 1, rows)]
+    get_indexes = [(i, i = 1, row)]
 
-    do i = 1, rows
-        max_num = maxloc(A(1,i:rows),dim=1)+i-1
-        Indexes([i,max_num]) = Indexes([max_num,i])
-        A(:,[i, max_num]) = A(:,[max_num,i])
+    do i = 1, row
+        max_number = maxloc(array(1,i:row),dim=1)+i-1
+        get_indexes([i,max_number]) = get_indexes([max_number,i])
+        array(:,[i, max_number]) = array(:,[max_number,i])
     end do
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, *) 'index of maximum element in bounds from and to rows'
-        write (Out, '('//columns//'i4)') (Indexes(i), i = 1, rows )
-        write(Out, *) 'Sorted array'
-        write (Out, '('//rows//'i4)') (A(i, :), i = 1, columns)
+        write(Out, *) "Index of maximum element in bounds from and to rows"
+        write (Out, '('//column//'i4)') (get_indexes(i), i = 1, row )
+        write(Out, *) "Sorted array"
+        write (Out, '('//row//'i4)') (array(i, :), i = 1, column)
     close (Out)
 end program main
 

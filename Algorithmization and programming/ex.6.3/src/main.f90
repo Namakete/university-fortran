@@ -5,10 +5,13 @@ program main
 
     implicit none
 
-    character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                    :: In = 0, Out = 1
-    real(R_)                   :: a, epsilon, y, y1
+    character(:), allocatable   :: input_file, output_file
+    integer                     :: In = 0, Out = 1
+    real(R_)                    :: a, epsilon, y, y1
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
         read (In, *) a, epsilon
     close(In)
@@ -19,6 +22,7 @@ program main
     end if
 
     y = a
+
     do
         y1 = y - (y*y-a)/(2*y)
         if (abs(y1-y) < epsilon) exit

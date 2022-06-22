@@ -5,29 +5,32 @@ program main
 
     implicit none
 
-    character(*), parameter :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                 :: In = 0, Out = 0, rows= 0, columns = 0, i = 0
-    integer, allocatable   :: A(:, :), columns_sum(:), rows_sum(:)
+    character(:), allocatable   :: input_file, output_file
+    integer                 :: In = 0, Out = 1, row = 0, column = 0, i = 0
+    integer, allocatable   :: array(:, :), sum_row(:), sum_column(:)
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
-        read (In, *) rows, columns
-        allocate (A(rows, columns))
-        read (In, *) (A(i, :), i = 1, rows)
+        read (In, *) row, column
+        allocate (array(row, column))
+        read (In, *) (array(i, :), i = 1, row)
     close (In)
 
     open (file=output_file, encoding=E_, newunit=Out)
-        write (Out, *) 'Input array'
-        write (Out, '('//columns//'i4)') (A(i, :), i = 1, rows)
+        write (Out, *) "Input Array:"
+        write (Out, '('//column//'i4)') (array(i, :), i = 1, row)
     close (Out)
     
-    columns_sum = sum(A,dim=1)
-    rows_sum = sum(A,dim=2)
+    sum_row = Sum(array, 2)
+    sum_column = Sum(array, 1)
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write(Out, *) 'Sum rows'
-        write(Out, '('//rows//'i4)') rows_sum
-        write(Out, *) 'Sum columns'
-        write(Out, '('//rows//'i4)') columns_sum 
-    close (Out) 
+        write(Out, *) "Sum of Rows:"
+        write(Out, '('//row//'i4)') sum_row
+        write(Out, *) "Sum of Columns:"
+        write(Out, '('//row//'i4)') sum_column 
+    close (Out)
 end program main
 

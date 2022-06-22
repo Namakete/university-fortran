@@ -5,7 +5,8 @@ module Matrix_IO
 
     implicit none
 contains
-    function ReadMatrix(input_file) result(Array)
+
+    function Read_Matrix(input_file) result(Array)
         character(*), intent(in)   :: input_file
         integer, allocatable      :: Array(:, :)
 
@@ -16,9 +17,9 @@ contains
             allocate (Array(rows, columns))
             read (In, *) (Array(i, :), i = 1, rows)
         close (In)
-    end function ReadMatrix
+    end function Read_Matrix
 
-    subroutine OutputMatrix(output_file, Array)
+    subroutine Output_Matrix(output_file, Array)
         character(*), intent(in)   :: output_file
         integer, intent(in)       :: Array(:, :)
 
@@ -27,9 +28,9 @@ contains
         open (file=output_file, encoding=E_, newunit=Out, position='append')
             write (Out, '('//ubound(Array, 2)//'i4)') (Array(i, :), i = 1, ubound(Array, 1))
         close (Out)
-    end subroutine OutputMatrix
+    end subroutine Output_Matrix
 
-    subroutine OutputMaxMinElements(output_file, Max, Min)
+    subroutine Output_Max_Min_Elements(output_file, Max, Min)
         character(*), intent(in)  :: output_file
         integer                   :: Max, Min
 
@@ -39,5 +40,6 @@ contains
             write(Out, *) "Max elemets: ", Max
             write(Out, *) "Min elemets: ", Min
         close (Out)
-    end subroutine OutputMaxMinElements
+    end subroutine Output_Max_Min_Elements
+
 end module Matrix_IO

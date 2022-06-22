@@ -7,23 +7,26 @@ program main
     
     implicit none
 
-    character(*), parameter         :: output_file = "output.txt", input_file_A = "../data/A.txt", input_file_C = "../data/C.txt"
+    character(:), allocatable       :: input_file_A, input_file_C, output_file
     integer                         :: Max = 0, Min = 0
     integer, allocatable, target    :: A(:,:), C(:,:)
     integer, contiguous, pointer    :: MPA(:), MPC(:)
     
-    A = ReadMatrix(input_file_A)
-    call OutputMatrix(output_file, A)
+    input_file_A = "../data/A.txt"
+    input_file_C = "../data/C.txt"
+    output_file = "output.txt"
+    
+    A = Read_Matrix(input_file_A)
+    call Output_Matrix(output_file, A)
     MPA(1:Size(A)) => A
-    call fina_max_min_elements(MPA, Max, Min)
-    call OutputMaxMinElements(output_file, Max, Min)
+    call Fina_Max_Min_Elements(MPA, Max, Min)
+    call Output_Max_Min_Elements(output_file, Max, Min)
 
-    C = ReadMatrix(input_file_C)
-    call OutputMatrix(output_file, C)
+    C = Read_Matrix(input_file_C)
+    call Output_Matrix(output_file, C)
     MPC(1:Size(C)) => C
-    call fina_max_min_elements(MPC, Max, Min)
-    call OutputMaxMinElements(output_file, Max, Min)
-   
+    call Fina_Max_Min_Elements(MPC, Max, Min)
+    call Output_Max_Min_Elements(output_file, Max, Min)
 end program main
 
 

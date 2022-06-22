@@ -1,8 +1,8 @@
- Indexes
+ Output array indexes
    1   2   3   4   5   6   7   8
- Array
+ Outputting array elements
    4  -2   8  -4  16  -6 -10 -14
- Negative indexes
+ Print of negative indexes
    2   4   6   7   8
- Negative array
+ Print of negative array elements
   -2  -4  -6 -10 -14

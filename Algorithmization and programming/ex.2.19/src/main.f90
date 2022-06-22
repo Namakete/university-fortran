@@ -6,9 +6,12 @@ program main
 
     implicit none
 
-    character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt", errorType = "Case not provided"
-    integer                    :: In = 0, Out = 0
-    real(R_)                   :: a = 0, b = 0, c = 0, d = 0, x = 0, w = 0, func = 0, dig = 0
+    character(:), allocatable   :: input_file, output_file
+    integer                     :: In = 0, Out = 1
+    real(R_)                    :: a = 0, b = 0, c = 0, d = 0, x = 0, w = 0, result = 0, dig = 0
+    
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
 
     open (file=input_file, newunit=In)
         read (In, *) a, b, c, d, x, w
@@ -23,14 +26,15 @@ program main
     close (Out)
 
     if ((a <= x .and. x <= b) .and. (c <= w .and. w <= d)) then
-        func = F(x, w, dig)
+        result = F(x, w, dig)
     else
-        write(*, *) "Error massage: ", errorType
+        write(*, *) "Error"
     end if
 
     open (file=output_file, encoding=E_, newunit=Out, position='append')
-        write (Out, "('y(x,w) = ', f0.2)") func
+        write (Out, "('y(x,w) = ', f0.2)") result
     close (Out)
+
 contains
 
     pure function F(x, w, dig)

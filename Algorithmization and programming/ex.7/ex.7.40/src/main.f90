@@ -5,12 +5,15 @@ program main
 
     implicit none
 
-    character(*), parameter         :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                         :: In = 0, Out = 1, N = 0, i = 0, numbers
+    character(:), allocatable       :: input_file, output_file
+    integer                         :: In = 0, Out = 1, N = 0, i = 0, numbers = 0
     integer, allocatable, target    :: C(:,:)
     integer, contiguous, pointer    :: B(:)
     integer, allocatable            :: Elements(:)
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
         read (In, *) N
         allocate (C(N, N))

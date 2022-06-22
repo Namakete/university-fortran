@@ -5,19 +5,22 @@ program main
 
     implicit none
 
-    character(*), parameter    :: input_file = "../data/input.txt", output_file = "output.txt"
-    integer                    :: In = 0, Out = 1
-    real(R_)                   :: a, b, c, d, e, f, m1, m2
+    character(:), allocatable   :: input_file, output_file
+    integer                     :: In = 0, Out = 1
+    real(R_)                    :: a, b, c, d, e, f, m1, m2
+    
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
 
     open (file=input_file, newunit=In)
         read (In, *) a, b, c, d, e, f
     close(In)
 
-    if (denominator(a, b, d, e) == 0) then
+    if (Denominator(a, b, d, e) == 0) then
         print *, 'System determinant is zero'
     else
-        m1 = File1(b, c, e, f) / denominator(a, b, d, e)
-        m2 = File2(a, c, d, f) / denominator(a, b, d, e)
+        m1 = F1(b, c, e, f) / Denominator(a, b, d, e)
+        m2 = F2(a, c, d, f) / Denominator(a, b, d, e)
     end if
 
     open (file = output_file, encoding = E_, newunit = Out)
@@ -27,21 +30,22 @@ program main
 
 contains
 
-    real function denominator(a,b,d,e) result(answer)
-        real :: a,b,d,e
+    real function Denominator(a,b,d,e) result(answer)
+        real :: a, b, d, e
 
         answer = (a * e - d * b)
-    end function denominator
+    end function Denominator
 
-    real function f1(b,c,e,f) result(answer)
-        real :: b,c,e,f
+    real function F1(b,c,e,f) result(answer)
+        real :: b, c, e, f
 
         answer = (c * e - f * b)
-    end function f1
+    end function F1
 
-    real function f2(a,c,d,f) result(answer)
-        real :: a,c,d,f
+    real function F2(a,c,d,f) result(answer)
+        real :: a, c, d, f
 
         answer = (a * f - d * c)
-    end function f2
+    end function F2
+
 end program main

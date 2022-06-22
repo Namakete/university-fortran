@@ -6,7 +6,7 @@ clean:
 	rm -rf obj/*
 	rm -rf bin/*
 
-debug:
+build:
 	mkdir -p bin obj
 	$(FC) $(FFLAGS) -c src/environment.f90 -J obj/ -o obj/environment.o
 	$(FC) $(FFLAGS) -c src/findMaxMinElements.f90 -J obj/ -o obj/findMaxMinElements.o

@@ -5,37 +5,43 @@ program main
 
     implicit none
 
-    character(*), parameter     :: input_file = "../data/input.txt" , output_file = "output.txt"
-    integer                     :: In = 0, Out = 0, rows = 0, columns = 0, i = 0
-    real(R_)                    :: Z = 0
-    real(R_), allocatable       :: A(:,:)
+    character(:), allocatable   :: input_file, output_file
+    integer                     :: In = 0, Out = 1, row = 0, column = 0, i = 0
+    real(R_)                    :: result = 0
+    real(R_), allocatable       :: array(:,:)
 
+    input_file = "../data/input.txt"
+    output_file = "output.txt"
+    
     open (file=input_file, newunit=In)
-        read(In, *) rows, columns
-        allocate(A(rows, columns))
-        read(In, *) (A(i,:), i = 1, rows)
+        read(In, *) row, column
+        allocate(array(row, column))
+        read(In, *) (array(i,:), i = 1, row)
     close (In)
 
-    open (file=output_file, encoding=e_, newunit=out)
-        write (out,*)"Array"
-        write (out, "("//columns//"f6.1)") (A(i,:), i = 1, rows)
+    open (file=output_file, encoding=E_, newunit=out)
+        write (out,*) "Basic of array"
+        write (out, "("//column//"f6.1)") (array(i,:), i = 1, row)
     close (out)
     
-    call MinMaxElement(A,Z)
+    call Min_Max_Element(array, result)
     
     open (file=output_file, encoding=e_, newunit=out, position="append")
-        write (Out, * ) 'Min element value by columns'
-        write (Out,"(f6.1)") Z
+        write (Out, * ) "Min element value by columns"
+        write (Out,"(f6.1)") result
     close (out)
-contains
-    pure subroutine MinMaxElement(A,Z)
-        real(R_) A(:,:)
-        real(R_) Z
-        intent(in) A
-        intent(out) Z
 
-        Z = Minval(Maxval(A, dim = 1))
-    end subroutine MinMaxElement
+contains
+
+    pure subroutine Min_Max_Element(array, result)
+        real(R_) array(:,:)
+        real(R_) result
+        intent(in) array
+        intent(out) result
+
+        result = Minval(Maxval(array, 1))
+    end subroutine Min_Max_Element
+
 end program main
 
 
