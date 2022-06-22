@@ -8,17 +8,18 @@ program main
     implicit none
     
     character(:), allocatable   :: input_file, output_file,output_file2
-    type(node), pointer         :: List  => Null()
-
+    type(node), allocatable         :: List
+    
     input_file  = "../data/list.txt"
     output_file = "output.txt"
     output_file2 = "output2.txt"
 
-    call Read_sorted_list(input_file, List)
+    List = Read_sorted_list(input_file)
+    call output_list(output_file, 'rewind', List)
     call Selection_Sort(List)
-    call Output_list(output_file, List)
-    call Delete(List)
-    
-    if(associated(list)) &
-        call Output_list2(output_file2, List)
+    call output_list(output_file, 'append', List)
+    DEALLOCATE(list)
+
+    if(ALLOCATED(list)) &
+        call Output_list2(output_file2, 'append' ,List)
 end program main

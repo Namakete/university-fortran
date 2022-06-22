@@ -1,5 +1,5 @@
 ! Copyright (c) Namakete (Ilya Oberemok) <namakete.dev@gmail.com>.
-! See the LICENCE file in the repository root for full licence text.  
+! See the LICENCE file in the repository root for full licence text.
 module List_Process
     use Environment
     use List_IO
@@ -7,42 +7,37 @@ module List_Process
     implicit none
 
 contains
-    recursive subroutine Selection_Sort(list)
-        type(node), pointer ::list
-        if(Associated(list)) then
+    
+    pure recursive subroutine Selection_Sort(list)
+        type(node),allocatable, intent(inout) ::list
+        
+        if(ALLOCATED(list)) then
             call Choose_And_Paste(list, list, list%next)
-            call Selection_Sort(list%next)           
+            call Selection_Sort(list%next)
         end if
     end subroutine Selection_Sort
 
-    recursive subroutine Choose_And_Paste(list, maximum, current)
-        type(node), pointer :: list
-        type(node), pointer :: maximum
-        type(node), pointer :: current
-        type(node), pointer :: tmp
+    pure recursive subroutine Choose_And_Paste(list, minimum, current)
+        type(node), allocatable, intent(inout) :: list
+        type(node), allocatable, intent(inout) :: minimum, current
+        type(node),  allocatable:: tmp, tmpNext
 
-        if(Associated(current))then
-            if(current%value < maximum%value) then
+        if(ALLOCATED(current)) then
+            if(current%value < minimum%value) then
                 call Choose_And_Paste(list, current, current%next)
             else
-                call Choose_And_Paste(list, maximum, current%next)
+                call Choose_And_Paste(list, minimum, current%next)
             end if
-        else
-            if(.not. associated(list, maximum)) then
-                tmp         => maximum
-                maximum     => current
-                tmp%next    => list
-                list        => tmp
-            end if
+        else if (list%Value /= minimum%Value) then
+            call move_alloc(minimum, tmp)
+            call move_alloc(tmp%Next, tmpNext)
+
+            call move_alloc(list%Next, tmp%Next)
+            call move_alloc(tmpNext, list%Next)
+
+            call move_alloc(list, minimum)
+            call move_alloc(tmp, list)
         end if
     end subroutine Choose_And_Paste
 
-    pure recursive subroutine Delete(current)
-        type(node), pointer, intent(inout) :: current
-
-        if (Associated(current)) then
-            deallocate(current)
-            call Delete(current)
-        end if
-    end subroutine Delete
 end module List_process
