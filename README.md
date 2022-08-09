@@ -44,6 +44,3 @@
 ## Vim / NoeVim
 
 Use [vim](https://neovim.io/) as an editor with [personal configurations](https://github.com/Namakete/personal-dotfiles/tree/main/nvim).
-
-[Copyright (c) 2022 Oberemok Ilya](https://github.com/Namakete/university-fortran/blob/main/LICENCE.md)
-
