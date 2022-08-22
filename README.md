@@ -1,5 +1,7 @@
 # Fortran 🫣
 
+>⚠️ use at your own peril.
+
 <details>
 <summary>Algorithmization and programming</summary>
   
